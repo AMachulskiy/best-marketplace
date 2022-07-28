@@ -1,0 +1,39 @@
+@import '../../../styles/settings.scss';
+
+.footer {
+  padding: $size * 4 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: $size * 4;
+  &__title {
+    font-size: 18px;
+    margin-bottom: $size;
+  }
+  &__column {
+    display: flex;
+    flex-direction: column;
+    a {
+      margin-bottom: $size;
+    }
+  }
+  &__app {
+    display: grid;
+    grid-gap: $size;
+    width: 150px;
+    margin-top: $size;
+    img {
+      width: 100%;
+    }
+  }
+  &__pay i {
+    font-size: $size * 6;
+    opacity: 0.5;
+  }
+  > *:nth-child(6) {
+    grid-column: 2 / 5;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 12px;
+  }
+}
