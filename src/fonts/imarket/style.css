@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'imarket';
-  src:  url('fonts/imarket.eot?a8mxpu');
-  src:  url('fonts/imarket.eot?a8mxpu#iefix') format('embedded-opentype'),
-    url('fonts/imarket.ttf?a8mxpu') format('truetype'),
-    url('fonts/imarket.woff?a8mxpu') format('woff'),
-    url('fonts/imarket.svg?a8mxpu#imarket') format('svg');
+  src: url('fonts/imarket.eot?bpb0j6');
+  src: url('fonts/imarket.eot?bpb0j6#iefix') format('embedded-opentype'),
+    url('fonts/imarket.ttf?bpb0j6') format('truetype'),
+    url('fonts/imarket.woff?bpb0j6') format('woff'),
+    url('fonts/imarket.svg?bpb0j6#imarket') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,141 +25,190 @@ i {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ic_visa:before {
+  content: "\e901";
+}
+
 .ic_menu:before {
   content: "\e900";
 }
+
 .ic_view-2:before {
   content: "\e903";
 }
+
 .ic_view-1:before {
   content: "\e904";
 }
+
 .ic_search:before {
   content: "\e905";
 }
+
 .ic_pin:before {
   content: "\e906";
 }
+
 .ic_shopping-cart:before {
   content: "\e907";
 }
+
 .ic_photo-camera:before {
   content: "\e90a";
 }
+
 .ic_user:before {
   content: "\e90d";
 }
+
 .ic_chat:before {
   content: "\e90f";
 }
+
 .ic_star-fill:before {
   content: "\e910";
 }
+
 .ic_star:before {
   content: "\e911";
 }
+
 .ic_like:before {
   content: "\e912";
 }
+
 .ic_like-fill:before {
   content: "\e913";
 }
+
 .ic_heart:before {
   content: "\e915";
 }
+
 .ic_like-2:before {
   content: "\e916";
 }
+
 .ic_box:before {
   content: "\e917";
 }
+
 .ic_close:before {
   content: "\e918";
 }
+
 .ic_woman:before {
   content: "\e919";
 }
+
 .ic_man:before {
   content: "\e91b";
 }
+
 .ic_stroller:before {
   content: "\e91e";
 }
+
 .ic_home:before {
   content: "\e921";
 }
+
 .ic_cosmetics:before {
   content: "\e923";
 }
+
 .ic_bags:before {
   content: "\e928";
 }
+
 .ic_digital-product:before {
   content: "\e92c";
 }
+
 .ic_toys:before {
   content: "\e933";
 }
+
 .ic_age-limit:before {
   content: "\e939";
 }
+
 .ic_products:before {
   content: "\e93d";
 }
+
 .ic_appliances:before {
   content: "\e948";
 }
+
 .ic_animal:before {
   content: "\e955";
 }
+
 .ic_sport:before {
   content: "\e95c";
 }
+
 .ic_car:before {
   content: "\e95f";
 }
+
 .ic_book:before {
   content: "\e963";
 }
+
 .ic_crown:before {
   content: "\e964";
 }
+
 .ic_ring:before {
   content: "\e965";
 }
+
 .ic_drill:before {
   content: "\e967";
 }
+
 .ic_armchair:before {
   content: "\e96c";
 }
+
 .ic_drink:before {
   content: "\e96d";
 }
+
 .ic_watering-can:before {
   content: "\e96e";
 }
+
 .ic_heartbeat:before {
   content: "\e96f";
 }
+
 .ic_pen:before {
   content: "\e972";
 }
+
 .ic_play-button:before {
   content: "\e974";
 }
+
 .ic_discount:before {
   content: "\e976";
 }
+
 .ic_aviation:before {
   content: "\e97a";
 }
+
 .ic_tag:before {
   content: "\e97c";
 }
+
 .ic_video-camera:before {
   content: "\e97e";
 }
+
 .ic_left-arrow:before {
   content: "\e97f";
 }
