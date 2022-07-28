@@ -1,0 +1,67 @@
+@import '../../../styles/settings.scss';
+
+.header {
+  display: grid;
+  grid-gap: $size * 2;
+  padding: $size * 2 0px $size * 3;
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    > * {
+      display: flex;
+      gap: $size * 4;
+    }
+  }
+  .header__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+}
+.project__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.message {
+  width: $size * 4;
+  height: $size * 4;
+  border-radius: $size;
+  background-color: $color-bg-icons;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.menu-btn {
+  width: $size * 6;
+  min-width: $size * 6;
+  height: $size * 6;
+  font-size: 32px;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  border: 1px solid $color-border-light;
+  border-radius: $size;
+  cursor: pointer;
+  &:hover {
+    border: 1px solid $color-btn-light;
+  }
+}
+.ic_menu {
+}
+.header__link {
+  text-align: center;
+  i {
+    font-size: 22px;
+    margin-bottom: 4px;
+    display: block;
+  }
+}
+.ic_pin {
+}
+.ic_user {
+}
+.ic_shopping-cart {
+}
