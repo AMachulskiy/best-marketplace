@@ -1,11 +1,19 @@
 import Search from '@src/components/search/search'
+import { useAppDispatch } from '@src/hooks/redux'
 import { ReactFC } from '@src/interfaces/react'
+import menuSlice from '@src/store/menu/menuSlice'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
 import './header.scss'
 
 const Header: ReactFC = () => {
+  const dispatch = useAppDispatch()
+  const { setIsOpen } = menuSlice.actions
+  const openMenu = () => {
+    dispatch(setIsOpen(true))
+  }
+
   return (
     <div className='container'>
       <header className='header'>
@@ -30,7 +38,7 @@ const Header: ReactFC = () => {
           </div>
         </div>
         <div className='header__bottom'>
-          <div className='menu-btn'>
+          <div className='menu-btn' onClick={openMenu}>
             <i className='ic_menu' />
           </div>
           <Search />
