@@ -2,6 +2,7 @@ import Search from '@src/components/search/search'
 import { useAppDispatch } from '@src/hooks/redux'
 import { ReactFC } from '@src/interfaces/react'
 import routing from '@src/routes/routes'
+import menuSlice from '@src/store/menu/menuSlice'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
