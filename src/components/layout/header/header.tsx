@@ -28,7 +28,7 @@ const Header: ReactFC = () => {
             <div className='lang'>
               <div className='lang__selected'>Ru</div>
             </div>
-            <Link to='/' className='user__location'>
+            <Link to={routing.services.shipping} className='user__location'>
               <i className='ic_pin' />
               <span>Москва</span>
             </Link>

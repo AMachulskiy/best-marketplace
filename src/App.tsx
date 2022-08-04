@@ -46,7 +46,7 @@ const App: React.FC = () => {
                       index
                       element={<TemplatePage title='Подкатегория' />}
                     />
-                    <Route path=':inner-subcategory'>
+                    <Route path=':inner_subcategory'>
                       <Route
                         index
                         element={
