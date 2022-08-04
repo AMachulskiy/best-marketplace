@@ -1,4 +1,5 @@
 import { ReactFC } from '@src/interfaces/react'
+import routing from '@src/routes/routes'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -10,14 +11,16 @@ const Footer: ReactFC = () => {
       <footer className='footer'>
         <div className='footer__column'>
           <h3 className='footer__title'>Покупателям</h3>
-          <Link to='/'>Как сделать заказ</Link>
-          <Link to='/'>Способы оплаты</Link>
-          <Link to='/'>Доставка</Link>
-          <Link to='/'>Возврат товара</Link>
-          <Link to='/'>Возврат денежных средств</Link>
-          <Link to='/'>Правила продажи</Link>
-          <Link to='/'>Правила пользования торговой площадкой</Link>
-          <Link to='/'>Вопросы и ответы</Link>
+          <Link to={routing.services.order}>Как сделать заказ</Link>
+          <Link to={routing.services.payVariants}>Способы оплаты</Link>
+          <Link to={routing.services.shipping}>Доставка</Link>
+          <Link to={routing.services.productBack}>Возврат товара</Link>
+          <Link to={routing.services.moneyBack}>Возврат денежных средств</Link>
+          <Link to={routing.services.salingRules}>Правила продажи</Link>
+          <Link to={routing.services.serviceRules}>
+            Правила пользования торговой площадкой
+          </Link>
+          <Link to={routing.services.faq}>Вопросы и ответы</Link>
         </div>
         <div className='footer__column'>
           <h3 className='footer__title'>Партнерам</h3>
