@@ -1,0 +1,9 @@
+@import '../../styles/settings.scss';
+
+.breadcrumbs {
+  display: flex;
+  margin-bottom: $size * 2;
+  span {
+    margin: 0 $size * 2;
+  }
+}
