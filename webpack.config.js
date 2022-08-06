@@ -13,6 +13,7 @@ module.exports = {
     main: './index.tsx',
   },
   output: {
+    publicPath: '/',
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'public'),
     assetModuleFilename: 'assets/[hash][ext][query]',
