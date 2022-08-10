@@ -10,7 +10,7 @@
 
 body {
   font-family: 'Exo 2', sans-serif;
-  min-height: 100vh;
+  height: 100vh;
   color: $color-text;
 }
 
@@ -25,15 +25,17 @@ a {
 .wrapper {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  min-height: 100vh;
+  height: 100%;
 }
 .container {
+  height: 100%;
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
   padding: 0 32px;
 }
 .content {
+  height: 100%;
   border-radius: $size;
   padding: 24px 0;
   box-shadow: rgb(0 16 61 / 7%) 0px 6px 20px;
