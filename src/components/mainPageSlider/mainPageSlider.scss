@@ -1,0 +1,33 @@
+@import '../../styles/settings.scss';
+
+.swiper {
+  width: 100%;
+  height: 500px;
+}
+.swiper-wrapper {
+  height: 80% !important;
+  top: 10% !important;
+}
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  border-radius: $size;
+  overflow: hidden;
+}
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: $color-text;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: $color-text !important;
+}

@@ -5,7 +5,7 @@ import Footer from './components/layout/footer/footer'
 import Header from './components/layout/header/header'
 import Menu from './components/main-menu/menu'
 import CatalogPage from './pages/catalogPage'
-import MainPage from './pages/mainPage'
+import MainPage from './pages/mainPage/mainPage'
 import TemplatePage from './pages/templatePage'
 import routing from './routes/routes'
 import createStore from './store/store'
@@ -20,10 +20,7 @@ const App: React.FC = () => {
           <main className='content'>
             <div className='container'>
               <Routes>
-                <Route
-                  path={routing.home}
-                  element={<MainPage title='Main page' />}
-                />
+                <Route path={routing.home} element={<MainPage />} />
                 <Route
                   path={routing.login}
                   element={<TemplatePage title='Вход' />}
