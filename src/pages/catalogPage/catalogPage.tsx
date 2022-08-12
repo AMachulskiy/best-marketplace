@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode } from 'react'
 import { ReactFC } from '@src/interfaces/react'
 import Breadcrumbs from '@src/components/breadcrumbs/breadcrumbs'
 import CategoryList from '@src/components/categoryList/categoryList'
