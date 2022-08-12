@@ -1,0 +1,28 @@
+@import '../../styles/settings.scss';
+
+.category-list {
+  *:not(:last-child) {
+    margin-bottom: $size;
+  }
+  &__main-category {
+    background-color: $color-bg-icons;
+    padding: $size - 4 $size;
+    border-radius: $size;
+    margin-left: -$size;
+  }
+  &__links {
+    display: flex;
+    flex-direction: column;
+    margin-left: -$size;
+    a {
+      border-radius: $size;
+      padding: $size - 4 $size;
+      &:hover {
+        background-color: $color-bg-icons;
+      }
+    }
+    *:not(:last-child) {
+      margin-bottom: $size;
+    }
+  }
+}
