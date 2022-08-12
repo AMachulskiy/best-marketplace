@@ -10,14 +10,6 @@ import CollectionCard from '@src/components/collectionCard/collectionCard'
 import MiniProductCard from '@src/components/miniProductCard/miniProductCard'
 
 const CatalogPage: ReactFC = () => {
-  let count = 1
-  const [productCount, setProductCount] = useState(42)
-
-  const viewMoreProducts = () => {
-    count += 1
-    setProductCount(productCount * count)
-  }
-
   const renderCollection = (num: number) => {
     const collections: ReactNode[] = []
     for (let i = 0; i < num; i++) {
