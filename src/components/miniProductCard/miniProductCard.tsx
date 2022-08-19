@@ -11,7 +11,7 @@ export interface IMiniProductCardProps {
 
 const MiniProductCard: ReactFC<IMiniProductCardProps> = ({ product }) => {
   return (
-    <div className='mini-product-card'>
+    <Link to={product.link} className='mini-product-card'>
       <div className='mini-product-card__img'>
         <img src={product.img} alt='Product mini-image' />
         {!!product.sale && (
@@ -19,10 +19,10 @@ const MiniProductCard: ReactFC<IMiniProductCardProps> = ({ product }) => {
         )}
       </div>
       <div className='mini-product-card__price'>{product.price} ₽</div>
-      <Link to={product.link} className='mini-product-card__link'>
+      <div className='mini-product-card__link'>
         {product.brand} / {product.name}
-      </Link>
-    </div>
+      </div>
+    </Link>
   )
 }
 
