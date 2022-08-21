@@ -1,0 +1,21 @@
+@import '../../../styles/settings.scss';
+
+.sub-category-page {
+  &__sort-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 70px;
+  }
+  &__products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $size * 2;
+    &_3-col {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    > * {
+      margin-top: -55px;
+    }
+  }
+}

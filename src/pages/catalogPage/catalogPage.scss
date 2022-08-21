@@ -4,41 +4,4 @@
   display: grid;
   grid-template-columns: 250px minmax(0, auto);
   grid-gap: 20px;
-  &__collections {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 10vw;
-    grid-gap: 2vw;
-    margin: $size * 4 0;
-    &_3 {
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(2, 10vw);
-    }
-    &_4 {
-      grid-template-rows: repeat(4, 10vw);
-    }
-  }
-  &__liked {
-    h2 {
-      margin-bottom: $size * 2;
-    }
-  }
-  &__products {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: $size * 2;
-    grid-auto-rows: 15vw;
-  }
-  &__more-btn {
-    margin: $size * 2 auto;
-    padding: $size * 2 $size * 4;
-    background-color: $color-btn;
-    border-radius: $size;
-    color: #fff;
-    font-size: 18px;
-    &:hover {
-      background-color: $color-btn-light;
-      cursor: pointer;
-    }
-  }
 }
