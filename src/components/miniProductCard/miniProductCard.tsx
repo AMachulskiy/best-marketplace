@@ -1,4 +1,5 @@
-import { IProduct } from '@src/interfaces/product'
+import functionHelpers from '@src/helpers/functionHelpers'
+import IProduct from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -10,15 +11,24 @@ export interface IMiniProductCardProps {
 }
 
 const MiniProductCard: ReactFC<IMiniProductCardProps> = ({ product }) => {
+  const originalPrice = functionHelpers.getDigitNumber(product.price)
+  let priceWithSale: string | number = functionHelpers.getSalePrice(
+    product.price,
+    product.sale
+  )
+  priceWithSale = functionHelpers.getDigitNumber(priceWithSale)
   return (
     <Link to={product.link} className='mini-product-card'>
       <div className='mini-product-card__img'>
-        <img src={product.img} alt='Product mini-image' />
+        <img src={product.cover} alt='Product miniImage' />
         {!!product.sale && (
           <div className='mini-product-card__sale'>-{product.sale} %</div>
         )}
       </div>
-      <div className='mini-product-card__price'>{product.price} ₽</div>
+      <div className='mini-product-card__price'>
+        <strong>{priceWithSale} ₽</strong>
+        <span>{originalPrice} ₽</span>
+      </div>
       <div className='mini-product-card__link'>
         {product.brand} / {product.name}
       </div>
