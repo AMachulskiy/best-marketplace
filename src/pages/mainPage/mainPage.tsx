@@ -2,10 +2,10 @@ import React, { ReactNode, useState } from 'react'
 import { ReactFC } from '@src/interfaces/react'
 import MainPageSlider from '@src/components/mainPageSlider/mainPageSlider'
 import CollectionCard from '@src/components/collectionCard/collectionCard'
+import MiniProductCard from '@src/components/miniProductCard/miniProductCard'
+import IProduct from '@src/interfaces/product'
 
 import './mainPage.scss'
-import MiniProductCard from '@src/components/miniProductCard/miniProductCard'
-import { IProduct } from '@src/interfaces/product'
 
 const MainPage: ReactFC = () => {
   let count = 1
@@ -33,10 +33,19 @@ const MainPage: ReactFC = () => {
         id: i,
         name,
         brand: 'Apple',
-        img: `https://picsum.photos/id/${i}/300/500`,
+        cover: `https://picsum.photos/id/${i}/300/500`,
         price: Math.floor(Math.random() * 1000000),
         link: '/catalog/elektronika/telefony',
         sale: Math.floor(Math.random() * 100),
+        color: 'black',
+        ram: '128 Гб',
+        ssd: '1 Тб',
+        rating: {
+          total: 5,
+          count: 33,
+        },
+        seller: 'STLZ',
+        shipTime: 3,
       }
       products.push(<MiniProductCard product={productData} />)
     }
