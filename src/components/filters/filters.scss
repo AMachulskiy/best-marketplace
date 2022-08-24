@@ -1,1 +1,6 @@
 @import '../../styles/settings.scss';
+
+.filters {
+  display: grid;
+  gap: $size * 2;
+}
