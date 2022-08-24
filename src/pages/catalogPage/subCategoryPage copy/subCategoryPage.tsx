@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 import { ReactFC } from '@src/interfaces/react'
 import IProduct from '@src/interfaces/product'
 import ProductCard from '@src/components/productCard/productCard'
+import CustomPagination from '@src/components/pagination/pagination'
 
 import './subCategoryPage.scss'
 
@@ -31,7 +32,7 @@ const SubCategoryPage: ReactFC = () => {
         shipTime: 3,
         credit: 'РАССРОЧКА ОТ 0-0-6!',
       }
-      products.push(<ProductCard product={productData} />)
+      products.push(<ProductCard key={i} product={productData} />)
     }
     return products
   }
@@ -56,7 +57,7 @@ const SubCategoryPage: ReactFC = () => {
         </div>
       </div>
       <div className='sub-category-page__products'>{renderProducts(16)}</div>
-      <div>Навигация</div>
+      <CustomPagination />
     </>
   )
 }
