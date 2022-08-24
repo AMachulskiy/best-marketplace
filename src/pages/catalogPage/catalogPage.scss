@@ -3,5 +3,5 @@
 .products {
   display: grid;
   grid-template-columns: 250px minmax(0, auto);
-  grid-gap: 20px;
+  grid-gap: $size * 4;
 }
