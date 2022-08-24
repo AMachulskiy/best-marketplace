@@ -28,9 +28,9 @@ const ProductCard: ReactFC<IProductCardProps> = ({ product }) => {
     const stars = []
     for (let i = 1; i <= 5; i++) {
       if (i <= total) {
-        stars.push(<i className='ic_star-fill fill' />)
+        stars.push(<i key={i} className='ic_star-fill fill' />)
       } else {
-        stars.push(<i className='ic_star-fill' />)
+        stars.push(<i key={i} className='ic_star-fill' />)
       }
     }
     return (
