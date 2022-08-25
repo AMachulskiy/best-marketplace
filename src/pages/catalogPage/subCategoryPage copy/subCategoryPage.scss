@@ -1,0 +1,56 @@
+@import '../../../styles/settings.scss';
+
+.sub-category-page {
+  &__products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $size * 2;
+    &_3-col {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    > * {
+      margin-top: -55px;
+    }
+  }
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 72px;
+  &__actions {
+    display: flex;
+    gap: $size * 2;
+    &-label {
+      color: $color-text-light;
+      font-weight: 600;
+    }
+  }
+  &__action {
+    cursor: pointer;
+    border-bottom: 1px dashed $color-text;
+    &.active {
+      font-weight: 800;
+    }
+    i {
+      font-size: 0.7em;
+      display: inline-block;
+      transform: rotate(-90deg);
+      margin-left: $size - 4;
+      font-weight: 700;
+    }
+  }
+  &__view {
+    display: flex;
+    gap: $size;
+    font-size: 18px;
+    i {
+      cursor: pointer;
+      color: $color-text-light;
+      &.active {
+        color: $color-text;
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import '../fonts/imarket/style.css';
 @import './settings.scss';
+@import '~bootstrap/scss/bootstrap';
 
 * {
   margin: 0;
@@ -39,4 +40,9 @@ a {
   border-radius: $size;
   padding: 24px 0;
   box-shadow: rgb(0 16 61 / 7%) 0px 6px 20px;
+}
+
+// Bootstrap styles
+.form-control:focus {
+  box-shadow: none;
 }

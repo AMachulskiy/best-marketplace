@@ -1,0 +1,36 @@
+@import '../../styles/settings.scss';
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: $size;
+  .pagination__prev-btn {
+    i {
+      font-size: 0.8em;
+      margin-right: $size;
+    }
+  }
+  .pagination__next-btn {
+    i {
+      font-size: 0.8em;
+      margin-left: $size;
+      display: inline-block;
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// Bootstrap style
+.page-link {
+  border-color: #fff !important;
+  border-radius: $size !important;
+  color: $color-text !important;
+  &.active,
+  .active > & {
+    color: #fff !important;
+    background: $color-btn !important;
+  }
+  &:focus {
+    box-shadow: none !important;
+  }
+}
