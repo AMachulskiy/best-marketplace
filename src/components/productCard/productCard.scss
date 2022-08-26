@@ -6,14 +6,13 @@
   position: relative;
   background-color: #fff;
   &:hover {
+    color: $color-text;
     box-shadow: 0 0 20px rgb(36 36 36 / 10%);
     z-index: 1;
     .product-card__actions {
       opacity: 1;
       pointer-events: all;
     }
-  }
-  &__top {
   }
   &__bage {
     display: inline-block;
@@ -36,8 +35,6 @@
     font-weight: 600;
     border-radius: $size;
     padding: 2px $size;
-  }
-  &__bottom {
   }
   &__price {
     font-size: 18px;
@@ -106,7 +103,4 @@
     cursor: pointer;
     font-size: 18px;
   }
-}
-
-.ic_heart {
 }
