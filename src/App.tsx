@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Footer from './components/layout/footer/footer'
 import Header from './components/layout/header/header'
 import Menu from './components/main-menu/menu'
+import ProductPage from './pages/productPage/productPage'
 import CatalogPage from './pages/catalogPage/catalogPage'
 import MainPage from './pages/mainPage/mainPage'
 import TemplatePage from './pages/templatePage'
@@ -39,13 +40,14 @@ const App: React.FC = () => {
                 />
                 <Route path='/catalog/:category'>
                   <Route index element={<CatalogPage />} />
-                  <Route path=':subcategory'>
+                  <Route path=':subCategory'>
                     <Route index element={<CatalogPage />} />
-                    <Route path=':innerSubcategory'>
+                    <Route path=':innerSubCategory'>
                       <Route index element={<CatalogPage />} />
                     </Route>
                   </Route>
                 </Route>
+                <Route path='product/:id' element={<ProductPage />} />
                 <Route />
               </Routes>
             </div>
