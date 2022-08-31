@@ -1,0 +1,46 @@
+@import '../../../styles/settings.scss';
+
+.product-actions {
+  position: sticky;
+  top: 110px;
+  padding: $size * 2;
+  border-radius: $size;
+  box-shadow: 0 0 20px rgb(0 0 0 / 10%);
+  &__top {
+    display: grid;
+    grid-template-columns: 1fr 24px;
+    gap: 16px;
+    align-items: center;
+    i {
+      cursor: pointer;
+      font-size: 24px;
+    }
+  }
+  &__price {
+    display: flex;
+    align-items: flex-end;
+    gap: $size;
+    strong {
+      font-size: 28px;
+      line-height: 1em;
+    }
+    span {
+      text-decoration: line-through;
+      color: $color-text-light;
+      margin-left: $size;
+    }
+  }
+  &__credit {
+    font-size: 14px;
+    span {
+      color: $color-text-light;
+      margin-right: $size;
+    }
+  }
+  &__ship {
+    strong {
+      margin-right: $size;
+      font-size: 14px;
+    }
+  }
+}
