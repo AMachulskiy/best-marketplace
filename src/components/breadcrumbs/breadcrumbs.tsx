@@ -1,7 +1,7 @@
 import IBreadcrumb from '@src/interfaces/breadcrumb'
 import { ReactFC } from '@src/interfaces/react'
 import routing from '@src/routes/routes'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 
 import './breadcrumbs.scss'
@@ -15,11 +15,11 @@ const Breadcrumbs: ReactFC<IBreadcrumbsProps> = ({ data }) => {
     const html = breadcrumbs.map(({ label, link }: IBreadcrumb, i) => {
       const isLast = i + 1 === breadcrumbs.length
       return (
-        <>
+        <Fragment key={label}>
           <span>/</span>
           {!isLast && <Link to={link}>{label}</Link>}
           {isLast && <div>{label}</div>}
-        </>
+        </Fragment>
       )
     })
     return html
