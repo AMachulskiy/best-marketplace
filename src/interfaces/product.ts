@@ -51,3 +51,11 @@ interface IProduct {
 }
 
 export default IProduct
+
+export interface IInformationList {
+  title: string
+  list: {
+    label: string
+    value: string
+  }[]
+}
