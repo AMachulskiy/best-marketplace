@@ -1,5 +1,7 @@
 import Breadcrumbs from '@src/components/breadcrumbs/breadcrumbs'
 import Preloader from '@src/components/preloader/preloader'
+import ProductInfo from '@src/modules/productInfo/productInfo'
+import StarsRating from '@src/components/starsRating/starsRating'
 import breadcrumbsHelpers from '@src/helpers/breadcrumbsHelpers'
 import IBreadcrumb from '@src/interfaces/breadcrumb'
 import ICategoriesParams from '@src/interfaces/params'
@@ -15,7 +17,7 @@ const productData: IProduct = {
   bage: 'new',
   name: 'MacBook Pro',
   brand: 'Apple',
-  cover: `https://picsum.photos/id/138/200/300`,
+  cover: 'https://picsum.photos/id/10/200/300',
   price: Math.floor(Math.random() * 1000000),
   link: '/catalog/elektronika/telefony',
   sale: Math.floor(Math.random() * 100),
@@ -59,12 +61,24 @@ const ProductPage: ReactFC = () => {
   if (!product) return <Preloader />
 
   return (
-    <div className='wrapper'>
+    <div className='product-page'>
       <Breadcrumbs data={getBreadcrumbsData()} />
-      <h3>
+      <h3 className='product__title'>
         {product.brand} / {product.name} / {product.ram} / {product.ssd} /{' '}
         {product.color}
       </h3>
+      <div className='product__statistic'>
+        <StarsRating rating={4} />
+        <a href='#reviews' className='product__reviews-link'>
+          8 отзывов
+        </a>
+        <div className='product__articul'>
+          <span>Артикул:</span>
+          <strong>113008008</strong>
+        </div>
+        <span>Купили более 40 раз</span>
+      </div>
+      <ProductInfo product={product} />
     </div>
   )
 }
