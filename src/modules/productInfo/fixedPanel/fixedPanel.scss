@@ -1,0 +1,69 @@
+@import '../../../styles/settings.scss';
+
+.fixed-panel {
+  position: fixed;
+  top: -100px;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background-color: #fff;
+  z-index: 10;
+  box-shadow: 0 0 20px rgb(0 0 0 / 10%);
+  transition: all 0.5s ease-in-out;
+  &.open {
+    top: 0;
+  }
+  .container {
+    display: flex;
+    align-items: center;
+    gap: $size * 2;
+    height: 100%;
+  }
+  &__img {
+    height: 70%;
+    border-radius: $size;
+    background: $color-bg-card;
+  }
+  &__main {
+    border-right: 2px solid $color-border-light;
+    padding-right: $size * 2;
+  }
+  &__title {
+    font-size: 18px;
+    span {
+      margin-left: $size;
+      color: $color-text-light;
+    }
+  }
+  &__stat {
+    display: flex;
+    align-items: center;
+    gap: $size;
+  }
+  &__price {
+    display: grid;
+    line-height: 1.5em;
+    strong {
+      font-size: 20px;
+    }
+    span {
+      text-decoration: line-through;
+      color: $color-text-light;
+    }
+  }
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $size * 2;
+    margin-left: auto;
+    margin-right: 0;
+    i {
+      cursor: pointer;
+      font-size: 24px;
+    }
+  }
+  &__reviews-link {
+    font-size: 14px;
+    border-bottom: 1px dashed $color-text-light;
+  }
+}
