@@ -1,0 +1,28 @@
+@import '../../../styles/settings.scss';
+
+.information-list__title {
+  font-weight: 600;
+  margin-bottom: $size;
+  &:not(:first-child) {
+    margin-top: $size * 2;
+  }
+}
+.information-list {
+  &__item {
+    display: grid;
+    grid-template-columns: 1fr 130px;
+    gap: $size * 2;
+    font-size: 14px;
+  }
+  &__label {
+    display: flex;
+    align-items: flex-end;
+    gap: $size;
+    color: $color-text-light;
+  }
+  &__line {
+    flex-grow: 1;
+    border-bottom: 1px dashed $color-text-light;
+    margin-bottom: 4px;
+  }
+}

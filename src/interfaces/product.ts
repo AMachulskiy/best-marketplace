@@ -45,6 +45,17 @@ interface IProduct {
     | '512 Гб'
     | '1 Тб'
     | '2 Тб'
+  category?: string
+  subCategory?: string
+  innerSubCategory?: string
 }
 
 export default IProduct
+
+export interface IInformationList {
+  title: string
+  list: {
+    label: string
+    value: string
+  }[]
+}
