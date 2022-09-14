@@ -48,6 +48,7 @@ interface IProduct {
   category?: string
   subCategory?: string
   innerSubCategory?: string
+  warehouse?: string
 }
 
 export default IProduct
@@ -58,4 +59,10 @@ export interface IInformationList {
     label: string
     value: string
   }[]
+}
+
+export interface IBasketProduct extends IProduct {
+  selectedColor?: keyof typeof ColorsEnum
+  count: number
+  checked: boolean
 }
