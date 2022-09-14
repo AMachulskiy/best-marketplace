@@ -1,0 +1,63 @@
+@import '../../styles/settings.scss';
+
+.basket-order {
+    box-shadow: $shadow;
+    border-radius: $size;
+    padding: $size * 2;
+    position: sticky;
+    top: $size * 4;
+    &__price {
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__price-info {
+        color: $color-text-light;
+        display: grid;
+        gap: $size;
+        margin: $size * 2 0;
+        > div {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    &__info-wrap {
+        display: grid;
+        gap: $size * 2;
+    }
+    &__info {
+        display: flex;
+        gap: $size;
+        flex-wrap: wrap;
+        color: $color-text-light;
+        strong,
+        span {
+            font-weight: 700;
+        }
+        span {
+            cursor: pointer;
+            color: $color-text;
+            border-bottom: 1px dashed $color-text;
+            justify-self: start;
+        }
+        div {
+            color: $color-text;
+        }
+    }
+    &__conditions {
+        font-size: 14px;
+        padding-left: $size * 2;
+        position: relative;
+        &::before {
+            content: '\2713';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: $color-text-light;
+        }
+    }
+}
+
+
