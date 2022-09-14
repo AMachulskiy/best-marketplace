@@ -10,6 +10,7 @@ import MainPage from './pages/mainPage/mainPage'
 import TemplatePage from './pages/templatePage'
 import routing from './routes/routes'
 import createStore from './store/store'
+import BasketPage from './pages/basketPage/basketPage'
 
 const App: React.FC = () => {
   return (
@@ -26,10 +27,7 @@ const App: React.FC = () => {
                   path={routing.login}
                   element={<TemplatePage title='Вход' />}
                 />
-                <Route
-                  path={routing.basket}
-                  element={<TemplatePage title='Корзина' />}
-                />
+                <Route path={routing.basket} element={<BasketPage />} />
                 <Route
                   path='/services/:service'
                   element={<TemplatePage title='Сервис' />}
