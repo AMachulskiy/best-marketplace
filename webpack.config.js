@@ -100,6 +100,7 @@ module.exports = {
     extensions: ['.js', '.ts', '.tsx', '.jsx'],
     alias: {
       '@src': path.join(basePath, '/'),
+      '@modules': path.join(basePath, '/modules/'),
       '@img': path.join(basePath, '/images/'),
       '@styles': path.join(basePath, '/styles/'),
     },
