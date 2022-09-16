@@ -286,7 +286,7 @@ const BasketPage: ReactFC = () => {
                     Выбрать способ оплаты
                   </span>
                 )}
-                {!!payMethod && <span>{payMethod}</span>}
+                {!!payMethod && <strong>{payMethod}</strong>}
               </div>
             )}
           </Panel>
