@@ -5,7 +5,7 @@
     border-radius: $size;
     padding: $size * 2;
     &_warning {
-        border: 1px solid $color-btn-light;
+        border: 1px solid $color-accent;
     }
     &__title {
         font-size: 24px;
@@ -18,13 +18,11 @@
             font-size: 16px;
             font-weight: 600;
             margin-bottom: auto;
-            color: $color-text-light;
+            color: $color-accent;
             &:hover {
                 color: $color-text;
             }
         }
     }
-    &__content {
-    }  
 }
 

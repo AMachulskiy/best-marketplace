@@ -30,15 +30,15 @@
         display: flex;
         gap: $size;
         flex-wrap: wrap;
-        color: $color-text-light;
+        color: $color-text;
         strong,
         span {
             font-weight: 700;
         }
         span {
             cursor: pointer;
-            color: $color-text;
-            border-bottom: 1px dashed $color-text;
+            color: $color-accent;
+            border-bottom: 1px dashed $color-accent;
             justify-self: start;
         }
         div {

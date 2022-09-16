@@ -16,12 +16,10 @@
   &__select-address {
     cursor: pointer;
     font-weight: 600;
-    color: $color-text-light;
+    color: $color-accent;
     &:hover {
       color: $color-text;
     }
-  }
-  &__sidebar {
   }
   &__modal-content {
     display: flex;
@@ -35,12 +33,13 @@
   }
   &__ship-types {
     display: flex;
+    align-items: stretch;
     max-width: 700px;
     height: 50px;
-    justify-content: space-between;
   }
   &__ship-type {
     cursor: pointer;
+    width: 50%;
     padding: $size * 2 $size * 4;
     border-radius: $size;
     background-color: $color-bg-card;
@@ -70,11 +69,14 @@
   &__pay {
     span {
       font-weight: 600;
-      color: $color-text-light;
+      color: $color-accent;
       cursor: pointer;
       &:hover {
         color: $color-text;
       }
+    }
+    strong {
+      font-weight: 400;
     }
   }
   &__pay-methods {
