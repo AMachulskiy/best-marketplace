@@ -1,0 +1,28 @@
+@import '../../styles/settings.scss';
+
+.panel {
+    box-shadow: $shadow;
+    border-radius: $size;
+    padding: $size * 2;
+    &_warning {
+        border: 1px solid $color-accent;
+    }
+    &__title {
+        font-size: 24px;
+        margin-bottom: $size * 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        span {
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: auto;
+            color: $color-accent;
+            &:hover {
+                color: $color-text;
+            }
+        }
+    }
+}
+
