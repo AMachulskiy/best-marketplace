@@ -41,7 +41,8 @@ const BasketList: ReactFC<IBasketListProps> = ({
       return {
         count: total.count + item.count,
         price:
-          total.price + functionHelpers.getSalePrice(item.price, item.sale),
+          total.price +
+          functionHelpers.getSalePrice(item.price * item.count, item.sale),
       }
     }, initialOrder)
     return (
@@ -78,9 +79,9 @@ const BasketList: ReactFC<IBasketListProps> = ({
         {!!products.length &&
           products.map((product) => (
             <BasketListItem
+              key={product.id}
               onDelete={onDelete}
               toFavourite={toFavourite}
-              key={product.id}
               product={product}
               changeCount={changeCount}
               onChecked={onChecked}
