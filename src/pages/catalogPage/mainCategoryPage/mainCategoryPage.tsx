@@ -25,7 +25,7 @@ const MainCategoryPage: ReactFC = () => {
         id: i,
         name,
         brand: 'Apple',
-        cover: `https://picsum.photos/id/${i}/300/500`,
+        cover: `https://placeimg.com/300/500/tech?id=${i}`,
         price: Math.floor(Math.random() * 1000000),
         link: '/catalog/elektronika/telefony',
         sale: Math.floor(Math.random() * 100),

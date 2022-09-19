@@ -26,8 +26,8 @@ const Slide: ReactFC<IPreviewSliderProps> = ({
     <div className={className}>
       <ContentZoom
         zoomPercent={350}
-        largeImageUrl={`https://picsum.photos/id/${slide}/1920/1080`}
-        imageUrl={`https://picsum.photos/id/${slide}/1920/1080`}
+        largeImageUrl={`https://placeimg.com/1920/1080/tech?id=${slide}`}
+        imageUrl={`https://placeimg.com/1920/1080/tech?id=${slide}`}
       />
     </div>
   )

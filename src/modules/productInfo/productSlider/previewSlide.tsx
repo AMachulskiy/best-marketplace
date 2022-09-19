@@ -22,7 +22,7 @@ const PreviewSlide: ReactFC<IPreviewSliderProps> = ({
   return (
     <img
       onMouseEnter={changeSlide}
-      src={`https://picsum.photos/id/${slide}/1920/1080`}
+      src={`https://placeimg.com/1920/1080/tech?id=${slide}`}
       alt='Main page slide'
     />
   )
