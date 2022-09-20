@@ -1,0 +1,42 @@
+@import '../../styles/settings.scss';
+
+.account {
+  display: grid;
+  gap: $size * 2;
+  &__row1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__row2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 214px;
+    gap: $size * 3;
+  }
+  &__row3 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 110px;
+    gap: $size * 3;
+  }
+  &__row4 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 172px;
+    gap: $size * 3;
+  }
+  &__nav-item {
+    display: inline-flex;
+    align-items: center;
+    gap: $size * 2;
+    font-weight: 600;
+    &:hover,
+    &.active {
+      color: $color-accent;
+    }
+    i {
+      font-size: 22px;
+    }
+  }
+}
