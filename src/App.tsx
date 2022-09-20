@@ -11,6 +11,7 @@ import TemplatePage from './pages/templatePage'
 import routing from './routes/routes'
 import createStore from './store/store'
 import BasketPage from './pages/basketPage/basketPage'
+import AccountPage from './pages/accountPage'
 
 const App: React.FC = () => {
   return (
@@ -32,10 +33,8 @@ const App: React.FC = () => {
                   path='/services/:service'
                   element={<TemplatePage title='Сервис' />}
                 />
-                <Route
-                  path='/lk/:page'
-                  element={<TemplatePage title='Личный кабинет' />}
-                />
+                <Route path='/account' element={<AccountPage />} />
+                <Route path='/account/:page' element={<AccountPage />} />
                 <Route path='/catalog/:category'>
                   <Route index element={<CatalogPage />} />
                   <Route path=':subCategory'>
