@@ -10,7 +10,7 @@
   opacity: 1;
   transition: all 0.3s ease-in-out;
   &.gradient {
-    background-color: $color-bg-card;
+    background: $gradient;
     .account-card__img {
       background-color: transparent;
       color: $color-accent;

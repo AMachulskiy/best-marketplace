@@ -52,14 +52,14 @@ const Account: ReactFC = () => {
       { icon: 'home', text: 'Главная', route: routing.account.index },
       { icon: 'heart', text: 'Избранное', route: routing.account.favorites },
       { icon: 'bags', text: 'Покупки', route: routing.account.orders },
-      { icon: 'chat', text: 'Обращения', route: routing.account.support },
+      { icon: 'comment', text: 'Обращения', route: routing.account.support },
       {
         icon: 'book',
         text: 'Отзывы и вопросы',
         route: routing.account.reviews,
       },
-      { icon: 'discount', text: 'Баланс', route: routing.account.wallet },
-      { icon: 'user', text: 'Профиль', route: routing.account.profile },
+      { icon: 'wallet', text: 'Баланс', route: routing.account.wallet },
+      { icon: 'user-out', text: 'Профиль', route: routing.account.profile },
     ]
 
     return navData.map(({ icon, text, route }) => (

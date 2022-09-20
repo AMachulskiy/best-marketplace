@@ -93,7 +93,9 @@ const AccountCard: ReactFC<IAccountProps> = ({
             }`}
             onClick={handleNotification}
           >
-            <i className={`ic_${isNotification ? 'star-fill' : 'star'}`} />
+            <i
+              className={`ic_${isNotification ? 'notifi-fill' : 'notifi-out'}`}
+            />
           </div>
         )}
       </div>
