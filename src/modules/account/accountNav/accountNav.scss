@@ -1,0 +1,10 @@
+@import '../../../styles/settings.scss';
+
+.account {
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $size * 3;
+  }
+}

@@ -47,37 +47,9 @@ const buyProductsData = getProducts(5)
 const favoriteProductsData = getProducts(138)
 
 const Account: ReactFC = () => {
-  const renderNavigation = () => {
-    const navData = [
-      { icon: 'home', text: 'Главная', route: routing.account.index },
-      { icon: 'heart', text: 'Избранное', route: routing.account.favorites },
-      { icon: 'bags', text: 'Покупки', route: routing.account.orders },
-      { icon: 'comment', text: 'Обращения', route: routing.account.support },
-      {
-        icon: 'book',
-        text: 'Отзывы и вопросы',
-        route: routing.account.reviews,
-      },
-      { icon: 'wallet', text: 'Баланс', route: routing.account.wallet },
-      { icon: 'user-out', text: 'Профиль', route: routing.account.profile },
-    ]
-
-    return navData.map(({ icon, text, route }) => (
-      <Link
-        key={route}
-        to={route}
-        className={`account__nav-item ${useMatch(route) ? 'active' : ''}`}
-      >
-        <i className={`ic_${icon}`} />
-        <span>{text}</span>
-      </Link>
-    ))
-  }
-
   return (
     <div className='account'>
-      <div className='account__row1'>{renderNavigation()}</div>
-      <div className='account__row2'>
+      <div className='account__row1'>
         <AccountCard
           link={routing.account.profile}
           title='Мачульский Алексей'
@@ -109,7 +81,7 @@ const Account: ReactFC = () => {
           isBig
         />
       </div>
-      <div className='account__row3'>
+      <div className='account__row2'>
         <AccountCard
           link={routing.account.cards}
           title='Мои карты'
@@ -128,7 +100,7 @@ const Account: ReactFC = () => {
           label='1 бренд'
         />
       </div>
-      <div className='account__row4'>
+      <div className='account__row3'>
         <AccountCard
           link={routing.account.orders}
           title='Покупки'
