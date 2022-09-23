@@ -7,7 +7,7 @@ import Filters from '@src/components/filters/filters'
 import CategoryList from '@src/components/categoryList/categoryList'
 import ICategoriesParams from '@src/interfaces/params'
 import MainCategoryPage from './mainCategoryPage/mainCategoryPage'
-import SubCategoryPage from './subCategoryPage copy/subCategoryPage'
+import SubCategoryPage from './subCategoryPage/subCategoryPage'
 
 import './catalogPage.scss'
 
