@@ -12,6 +12,7 @@ import routing from './routes/routes'
 import createStore from './store/store'
 import BasketPage from './pages/basketPage/basketPage'
 import AccountPage from './pages/accountPage'
+import FavoritePage from './pages/favoritePage'
 
 const App: React.FC = () => {
   return (
@@ -33,8 +34,11 @@ const App: React.FC = () => {
                   path='/services/:service'
                   element={<TemplatePage title='Сервис' />}
                 />
-                <Route path='/account' element={<AccountPage />} />
-                <Route path='/account/:page' element={<AccountPage />} />
+                <Route path='/account'>
+                  <Route index element={<AccountPage />} />
+                  <Route path='favorites' element={<FavoritePage />} />
+                  <Route path=':page' element={<AccountPage />} />
+                </Route>
                 <Route path='/catalog/:category'>
                   <Route index element={<CatalogPage />} />
                   <Route path=':subCategory'>

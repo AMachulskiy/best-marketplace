@@ -1,3 +1,4 @@
+import { Moment } from 'moment'
 import IRating from './rating'
 
 export enum ColorsEnum {
@@ -65,4 +66,9 @@ export interface IBasketProduct extends IProduct {
   selectedColor?: keyof typeof ColorsEnum
   count: number
   checked: boolean
+}
+
+export interface IFavoriteProduct extends IProduct {
+  isAvailable: boolean
+  addToFavoriteDate: Moment
 }

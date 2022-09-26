@@ -1,0 +1,71 @@
+@import '../../styles/settings.scss';
+
+.selectbox {
+  cursor: pointer;
+  width: 250px;
+  position: relative;
+  z-index: 2;
+  &.open {
+    .selectbox__selected-arrow {
+      transform: rotate(-45deg);
+      top: 2px;
+    }
+    .selectbox__list {
+      display: block;
+    }
+  }
+  &__selected {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $size $size * 2;
+    border: 1px solid $color-bg-card;
+    border-radius: $size;
+    background-color: white;
+    &-arrow {
+      position: relative;
+      top: -2px;
+      $size: 10px;
+      width: $size;
+      height: $size;
+      border-top: 2px solid $color-text-light;
+      border-right: 2px solid $color-text-light;
+      transition: all 0.3s ease-in-out;
+      transform: rotate(135deg);
+    }
+  }
+  &__list {
+    display: none;
+    position: absolute;
+    top: 115%;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    padding: $size - 4 $size;
+    margin-top: $size;
+    border-radius: $size;
+    box-shadow: $shadow;
+    background-color: white;
+  }
+  &__item {
+    padding: $size $size * 2;
+    transition: all 0.3s ease-in-out;
+    border-radius: $size;
+    &.selected {
+      color: $color-accent;
+      i {
+        color: inherit;
+      }
+    }
+    &:hover {
+      background-color: $color-bg-icons;
+    }
+    i {
+      color: $color-text-light;
+      margin-left: $size;
+      font-size: 0.8em;
+    }
+  }
+}
