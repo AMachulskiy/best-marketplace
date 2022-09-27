@@ -3,7 +3,6 @@ import { Modal } from 'react-bootstrap'
 import { ReactFC } from '@src/interfaces/react'
 import Panel from '@src/components/panel/panel'
 import BasketList from '@src/modules/basketList/basketList'
-import { IBasketProduct } from '@src/interfaces/product'
 import BasketOrder, {
   IBasketOrderProps,
 } from '@src/components/basketOrder/basketOrder'
@@ -11,63 +10,12 @@ import Button from '@src/components/button/button'
 import moment from 'moment'
 import Preloader from '@src/components/preloader/preloader'
 import functionHelpers from '@src/helpers/functionHelpers'
+import generateProducts from '@src/data/products'
+import IProduct from '@src/interfaces/product'
 
 import './basketPage.scss'
 
-const producstData: IBasketProduct[] = [
-  {
-    id: 1,
-    bage: 'new',
-    name: 'MacBook Pro 13',
-    brand: 'Apple',
-    cover: 'https://placeimg.com/200/300/tech?id=10',
-    price: Math.floor(Math.random() * 1000000),
-    link: '/catalog/elektronika/telefony',
-    sale: Math.floor(Math.random() * 100),
-    color: 'black',
-    ram: '128 Гб',
-    ssd: '1 Тб',
-    rating: {
-      total: 3,
-      count: 33,
-    },
-    seller: 'STLZ',
-    shipTime: 3,
-    credit: 'РАССРОЧКА ОТ 0-0-6!',
-    category: 'elektronika',
-    subCategory: 'komputery',
-    warehouse: 'Склад WB',
-    selectedColor: 'black',
-    count: 1,
-    checked: true,
-  },
-  {
-    id: 2,
-    bage: 'new',
-    name: 'MacBook Pro 16',
-    brand: 'Apple',
-    cover: 'https://placeimg.com/200/300/tech?id=11',
-    price: Math.floor(Math.random() * 1000000),
-    link: '/catalog/elektronika/telefony',
-    sale: Math.floor(Math.random() * 100),
-    color: 'black',
-    ram: '128 Гб',
-    ssd: '1 Тб',
-    rating: {
-      total: 3,
-      count: 33,
-    },
-    seller: 'STLZ',
-    shipTime: 3,
-    credit: 'РАССРОЧКА ОТ 0-0-6!',
-    category: 'elektronika',
-    subCategory: 'komputery',
-    warehouse: 'Склад STLZ',
-    selectedColor: 'white',
-    count: 1,
-    checked: true,
-  },
-]
+const producstData: IProduct[] = generateProducts(3)
 
 const ShipType = {
   postomat: 'Пункт выдачи',
@@ -75,7 +23,7 @@ const ShipType = {
 }
 
 const BasketPage: ReactFC = () => {
-  const [products, setProducts] = useState<IBasketProduct[]>(producstData)
+  const [products, setProducts] = useState<IProduct[]>(producstData)
   const [isOpenShipModal, setIsOpenShipModal] = useState(false)
   const [isOpenPayModal, setIsOpenPayModal] = useState(false)
   const [payMethod, setPayMethod] = useState(null)
@@ -111,12 +59,12 @@ const BasketPage: ReactFC = () => {
       saleSize: 0,
     }
     const countPrice = filteredProducts.reduce((total, item) => {
-      const totalPrice = item.price * item.count
+      const totalPrice = item.price * item.selectedCount
       const salePrice =
         total.salePrice + functionHelpers.getSalePrice(totalPrice, item.sale)
       const fullPrice = total.fullPrice + totalPrice
       return {
-        count: total.count + item.count,
+        count: total.count + item.selectedCount,
         salePrice,
         fullPrice,
         saleSize: fullPrice - salePrice,
@@ -195,9 +143,9 @@ const BasketPage: ReactFC = () => {
   }
 
   const changeCount = (id: number, count: number) => {
-    const updatedProducts = products.map((product: IBasketProduct) => {
+    const updatedProducts = products.map((product: IProduct) => {
       if (product.id === id) {
-        product.count = count
+        product.selectedCount = count
       }
       return product
     })
@@ -273,7 +221,8 @@ const BasketPage: ReactFC = () => {
             title='Способ оплаты'
             isWarning={isWarning.payMethod}
             isChange={payMethod}
-            onChange={() => setIsOpenPayModal(true)}>
+            onChange={() => setIsOpenPayModal(true)}
+          >
             {!shipAddress && (
               <span>
                 Для выбора способа оплаты, необходимо выбрать адрес доставки

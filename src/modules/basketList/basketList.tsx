@@ -1,14 +1,14 @@
-import { IBasketProduct } from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
 import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
 import functionHelpers from '@src/helpers/functionHelpers'
+import IProduct from '@src/interfaces/product'
 import BasketListItem from './basketListItem/basketListItem'
 
 import './basketList.scss'
 
 interface IBasketListProps {
-  products: IBasketProduct[]
+  products: IProduct[]
   changeCount: (id: number, count: number) => void
   onDelete: (id: number) => void
   toFavourite: (id: number) => void
@@ -39,10 +39,13 @@ const BasketList: ReactFC<IBasketListProps> = ({
     }
     const orderInfo = products.reduce((total, item) => {
       return {
-        count: total.count + item.count,
+        count: total.count + item.selectedCount,
         price:
           total.price +
-          functionHelpers.getSalePrice(item.price * item.count, item.sale),
+          functionHelpers.getSalePrice(
+            item.price * item.selectedCount,
+            item.sale
+          ),
       }
     }, initialOrder)
     return (
