@@ -1,33 +1,33 @@
-import { ReactFC } from '@src/interfaces/react'
 import ISelectboxItem from '@src/interfaces/selectbox'
 import React, { useState } from 'react'
 
 import './selectbox.scss'
 
-interface ISelectboxProps {
-  data: ISelectboxItem[]
-  onChange?: (item: ISelectboxItem) => void
+interface ISelectboxProps<ValueType> {
+  data: ISelectboxItem<ValueType>[]
+  onChange?: (item: ISelectboxItem<ValueType>) => void
 }
 
-const Selectbox: ReactFC<ISelectboxProps> = ({ data, onChange }) => {
+const Selectbox = <ValueType extends {}>(props: ISelectboxProps<ValueType>) => {
+  const { data, onChange } = props
   const [selected, setSelected] = useState(data[0])
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleChange = (item: ISelectboxItem) => {
+  const handleChange = (item: ISelectboxItem<ValueType>) => {
     setSelected(item)
     onChange(item)
     setIsOpen(false)
   }
 
   const renderList = () => {
-    return data.map((item: ISelectboxItem) => {
+    return data.map((item: ISelectboxItem<ValueType>) => {
       const itemClass =
         item.value === selected.value
           ? 'selectbox__item selected'
           : 'selectbox__item'
       return (
         <div
-          key={item.value}
+          key={item.value as any}
           className={itemClass}
           onClick={() => handleChange(item)}
         >

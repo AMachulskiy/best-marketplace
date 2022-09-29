@@ -1,35 +1,13 @@
 import { ReactFC } from '@src/interfaces/react'
 import routing from '@src/routes/routes'
 import React from 'react'
-import { Link, useMatch } from 'react-router-dom'
 import IProduct from '@src/interfaces/product'
+import generateProducts from '@src/data/products'
 import AccountCard from './accountCard/accountCard'
 
 import './account.scss'
 
-const product: IProduct = {
-  id: 1,
-  bage: 'new',
-  name: 'MacBook Pro 13',
-  brand: 'Apple',
-  cover: 'https://placeimg.com/200/300/tech?id=10',
-  price: Math.floor(Math.random() * 1000000),
-  link: '/catalog/elektronika/telefony',
-  sale: Math.floor(Math.random() * 100),
-  color: 'black',
-  ram: '128 Гб',
-  ssd: '1 Тб',
-  rating: {
-    total: 3,
-    count: 33,
-  },
-  seller: 'STLZ',
-  shipTime: 3,
-  credit: 'РАССРОЧКА ОТ 0-0-6!',
-  category: 'elektronika',
-  subCategory: 'komputery',
-  warehouse: 'Склад STLZ',
-}
+const product: IProduct = generateProducts(1)[0]
 
 const getProducts = (count: number): IProduct[] => {
   const products: IProduct[] = []

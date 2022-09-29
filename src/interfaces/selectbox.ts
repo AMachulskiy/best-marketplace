@@ -1,15 +1,6 @@
-export enum SortTypeEnum {
-  addDateDown,
-  addDateUp,
-  priceUp,
-  priceDown,
-  available,
-  notAvailable,
-}
-
-interface ISelectboxItem {
+interface ISelectboxItem<ValueType> {
   label: string
-  value: SortTypeEnum
+  value: ValueType
   icon?: 'up' | 'down'
 }
 
