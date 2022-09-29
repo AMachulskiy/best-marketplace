@@ -33,6 +33,7 @@ const sortHelpers = {
       if (sortType === SortTypeEnum.notAvailable) {
         return dataA.isAvailable < dataB.isAvailable ? -1 : 1
       }
+      return 0
     })
     return [...products]
   },
