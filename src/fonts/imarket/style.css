@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'imarket';
-  src:  url('fonts/imarket.eot?y198p6');
-  src:  url('fonts/imarket.eot?y198p6#iefix') format('embedded-opentype'),
-    url('fonts/imarket.ttf?y198p6') format('truetype'),
-    url('fonts/imarket.woff?y198p6') format('woff'),
-    url('fonts/imarket.svg?y198p6#imarket') format('svg');
+  src:  url('fonts/imarket.eot?zakeic');
+  src:  url('fonts/imarket.eot?zakeic#iefix') format('embedded-opentype'),
+    url('fonts/imarket.ttf?zakeic') format('truetype'),
+    url('fonts/imarket.woff?zakeic') format('woff'),
+    url('fonts/imarket.svg?zakeic#imarket') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,9 @@ i {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ic_dots:before {
+  content: "\e91a";
+}
 .ic_arrow-up:before {
   content: "\e90e";
 }

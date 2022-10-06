@@ -1,4 +1,5 @@
 import { Moment } from 'moment'
+import orderFilterTypeEnum from './filters'
 import IRating from './rating'
 
 export enum ColorsEnum {
@@ -55,6 +56,9 @@ interface IProduct {
   checked: boolean
   isAvailable: boolean
   addToFavoriteDate: Moment
+  orderDate?: Moment
+  getDate?: Moment
+  orderStatus?: orderFilterTypeEnum
 }
 
 export default IProduct

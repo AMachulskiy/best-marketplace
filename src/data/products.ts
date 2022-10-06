@@ -10,6 +10,7 @@ const generateProducts = (num: number) => {
     const nameId = Math.floor(Math.random() * names.length)
     const brandsId = Math.floor(Math.random() * brands.length)
     const colorsId = Math.floor(Math.random() * colors.length)
+    const date = moment(Date.now() - Math.floor(Math.random() * 100000000))
     const productData: IProduct = {
       id: i,
       bage: 'new',
@@ -36,12 +37,13 @@ const generateProducts = (num: number) => {
       shipTime: 3,
       credit: 'РАССРОЧКА ОТ 0-0-6!',
       isAvailable: !!Math.round(Math.random()),
-      addToFavoriteDate: moment(
-        Date.now() - Math.floor(Math.random() * 100000000)
-      ),
+      addToFavoriteDate: date,
       selectedColor: 'black',
       selectedCount: 1,
       checked: true,
+      orderDate: date,
+      getDate: date.add(3, 'day'),
+      orderStatus: Math.floor(Math.random() * 5),
     }
     products.push(productData)
   }
