@@ -73,9 +73,11 @@ const OrderCard: ReactFC<IOrderCardProps> = ({
               <div onClick={onHideProduct}>
                 <span>Не показывать в покупках</span>
               </div>
-              <div onClick={addToRefund}>
-                <span>Оформить возврат -</span> <strong>100 ₽</strong>
-              </div>
+              {!isRefund && (
+                <div onClick={addToRefund}>
+                  <span>Оформить возврат -</span> <strong>100 ₽</strong>
+                </div>
+              )}
             </div>
             <i className='ic_dots' />
           </div>
