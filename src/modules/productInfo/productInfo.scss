@@ -1,0 +1,53 @@
+@import '../../styles/settings.scss';
+
+.product {
+  &__block {
+    display: grid;
+    grid-template-columns: 2fr 1.3fr 1.2fr;
+    gap: $size * 2;
+  }
+  &__block-title {
+    margin: 32px 0 16px;
+  }
+  &__link {
+    display: inline-block;
+    cursor: pointer;
+    margin-top: $size * 2;
+    font-size: 14px;
+    border-bottom: 1px dashed $color-text-light;
+    color: $color-text-light;
+    &:hover {
+      color: $color-text;
+    }
+  }
+  &__all-characteristics,
+  &__desc-text {
+    max-height: 200px;
+    overflow: hidden;
+    position: relative;
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 0.5em;
+      background: linear-gradient(to bottom, transparent, #fff);
+    }
+    &.open {
+      max-height: 100%;
+      &::after {
+        display: none;
+      }
+    }
+  }
+  &__desc-title {
+    font-weight: 600;
+    margin-bottom: $size;
+  }
+  &__desc-text {
+    max-height: 100px;
+    font-size: 14px;
+  }
+}

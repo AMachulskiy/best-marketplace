@@ -1,0 +1,26 @@
+@import '../../styles/settings.scss';
+
+.product {
+  &__title {
+    font-size: 28px;
+    font-weight: 700;
+  }
+  &__statistic {
+    display: flex;
+    align-items: center;
+    gap: $size * 2;
+    margin-bottom: $size * 2;
+    span {
+      color: $color-text-light;
+    }
+  }
+  &__reviews-link {
+    border-bottom: 1px dashed $color-text-light;
+  }
+  &__articul {
+    span {
+      color: $color-text-light;
+      margin-right: $size;
+    }
+  }
+}

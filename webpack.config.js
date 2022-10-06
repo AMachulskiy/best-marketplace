@@ -13,6 +13,7 @@ module.exports = {
     main: './index.tsx',
   },
   output: {
+    publicPath: '/',
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'public'),
     assetModuleFilename: 'assets/[hash][ext][query]',
@@ -99,6 +100,7 @@ module.exports = {
     extensions: ['.js', '.ts', '.tsx', '.jsx'],
     alias: {
       '@src': path.join(basePath, '/'),
+      '@modules': path.join(basePath, '/modules/'),
       '@img': path.join(basePath, '/images/'),
       '@styles': path.join(basePath, '/styles/'),
     },

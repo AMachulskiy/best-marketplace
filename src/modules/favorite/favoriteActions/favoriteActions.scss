@@ -1,0 +1,11 @@
+@import '../../../styles/settings.scss';
+
+.favorite-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $size * 2;
+  &__check {
+    margin-right: auto;
+  }
+}

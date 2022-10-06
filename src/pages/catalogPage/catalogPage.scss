@@ -1,0 +1,7 @@
+@import '../../styles/settings.scss';
+
+.products {
+  display: grid;
+  grid-template-columns: 250px minmax(0, auto);
+  grid-gap: $size * 4;
+}

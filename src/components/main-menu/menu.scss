@@ -1,0 +1,97 @@
+@import '../../styles/settings.scss';
+
+.menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  display: grid;
+  background-color: whitesmoke;
+  box-shadow: 4px 0px 8px 0px rgba(34, 60, 80, 0.5);
+  &__wrap {
+    position: fixed;
+    justify-items: start;
+    z-index: 11;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: none;
+    &.open {
+      display: grid;
+    }
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: $color-text-light;
+      opacity: 0.5;
+    }
+  }
+  &__list {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: $size * 3;
+    & + & {
+      border-left: 2px solid $color-border-light;
+    }
+  }
+  &__category {
+    font-size: 18px;
+    margin-bottom: $size;
+    display: flex;
+    align-items: center;
+    padding: $size;
+    &:hover {
+      background-color: $color-bg-icons;
+      border-radius: $size;
+    }
+    i {
+      font-size: 22px;
+      margin-right: $size * 2;
+    }
+  }
+  &__title {
+    margin-bottom: $size;
+  }
+  &__dropcategory {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $size;
+    font-size: 18px;
+    margin-bottom: $size * 2;
+    cursor: pointer;
+    span {
+      cursor: pointer;
+    }
+    strong {
+      opacity: 0;
+    }
+    &:hover {
+      strong {
+        opacity: 1;
+      }
+    }
+  }
+  &__img {
+    width: 90%;
+    border-radius: $size;
+  }
+  &__close {
+    position: absolute;
+    top: $size;
+    right: -$size * 4;
+    font-size: 20px;
+    font-weight: 600;
+    color: $color-text-light;
+    cursor: pointer;
+    &:hover {
+      color: $color-text;
+    }
+  }
+}

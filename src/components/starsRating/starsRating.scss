@@ -1,0 +1,13 @@
+@import '../../styles/settings.scss';
+
+.stars-rating {
+  display: flex;
+  align-items: center;
+  gap: $size - 4;
+  i {
+    color: $color-bg-icons;
+    &.fill {
+      color: $color-text;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import '../fonts/imarket/style.css';
 @import './settings.scss';
+@import '~bootstrap/scss/bootstrap';
 
 * {
   margin: 0;
@@ -10,31 +11,37 @@
 
 body {
   font-family: 'Exo 2', sans-serif;
-  min-height: 100vh;
+  height: 100vh;
   color: $color-text;
 }
 
 a {
   color: $color-text;
-  opacity: 0.7;
   text-decoration: none;
   &:hover {
-    opacity: 1;
+    color: $color-text-light;
   }
 }
 .wrapper {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  min-height: 100vh;
+  height: 100%;
 }
 .container {
+  height: 100%;
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
   padding: 0 32px;
 }
 .content {
+  height: 100%;
   border-radius: $size;
   padding: 24px 0;
   box-shadow: rgb(0 16 61 / 7%) 0px 6px 20px;
+}
+
+// Bootstrap styles
+.form-control:focus {
+  box-shadow: none;
 }

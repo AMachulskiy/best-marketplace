@@ -1,0 +1,30 @@
+@import '../../styles/settings.scss';
+
+.search-input {
+  width: 500px;
+  &__input {
+    padding: $size $size * 2;
+    border-radius: $size;
+    background-color: $color-bg-search;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $size * 2;
+    outline: 0px solid $color-accent;
+    transition: all 0.1s ease-in-out;
+    &:focus-within {
+      background-color: white;
+      outline-width: 2px;
+    }
+    input {
+      background: none;
+      border: none;
+      outline: none;
+      flex-grow: 1;
+    }
+    i {
+      cursor: pointer;
+      font-size: 18px;
+    }
+  }
+}

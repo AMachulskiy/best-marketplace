@@ -1,0 +1,25 @@
+@import '../../styles/settings.scss';
+
+.button {
+  cursor: pointer;
+  padding: 0 $size * 2;
+  height: 46px;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  background-color: $color-btn;
+  color: #fff;
+  border-radius: $size;
+  margin: $size * 2 0;
+  &:hover {
+    background-color: $color-btn-light;
+  }
+  &.outline {
+    background-color: transparent;
+    color: $color-text;
+    border: 2px solid $color-btn;
+    &:hover {
+      border-color: $color-text-light;
+    }
+  }
+}

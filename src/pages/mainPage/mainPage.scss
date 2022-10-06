@@ -1,0 +1,37 @@
+@import '../../styles/settings.scss';
+
+.main {
+  h2 {
+    margin-bottom: $size * 2;
+  }
+  &__collections {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 10vw;
+    grid-gap: 2vw;
+    margin: $size * 4 0;
+    &_4 {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 10vw);
+    }
+  }
+
+  &__products {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: $size * 2;
+    grid-auto-rows: 15vw;
+  }
+  &__more-btn {
+    margin: $size * 2 auto;
+    padding: $size * 2 $size * 4;
+    background-color: $color-btn;
+    border-radius: $size;
+    color: #fff;
+    font-size: 18px;
+    &:hover {
+      background-color: $color-btn-light;
+      cursor: pointer;
+    }
+  }
+}

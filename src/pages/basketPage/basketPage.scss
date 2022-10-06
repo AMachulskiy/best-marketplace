@@ -1,0 +1,98 @@
+@import '../../styles/settings.scss';
+
+.basket {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: $size * 4;
+  &__main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $size * 2;
+    > *:nth-child(1),
+    > *:nth-child(2) {
+      grid-column: 1 / -1;
+    }
+  }
+  &__select-address {
+    cursor: pointer;
+    font-weight: 600;
+    color: $color-accent;
+    &:hover {
+      color: $color-text;
+    }
+  }
+  &__modal-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 30vh;
+    gap: $size * 2;
+    .button {
+      margin-right: auto;
+      margin-top: auto;
+    }
+  }
+  &__ship-types {
+    display: flex;
+    align-items: stretch;
+    max-width: 700px;
+    height: 50px;
+  }
+  &__ship-type {
+    cursor: pointer;
+    width: 50%;
+    padding: $size * 2 $size * 4;
+    border-radius: $size;
+    background-color: $color-bg-card;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    line-height: 1em;
+    font-weight: 500;
+    &.active {
+      cursor: default;
+      background-color: #fff;
+      border: 1px solid $color-btn;
+    }
+  }
+  &__ship-address-list {
+    display: grid;
+    gap: $size;
+    strong {
+      cursor: pointer;
+      color: $color-text-light;
+      &:hover,
+      &.active {
+        color: $color-text;
+      }
+    }
+  }
+  &__pay {
+    span {
+      font-weight: 600;
+      color: $color-accent;
+      cursor: pointer;
+      &:hover {
+        color: $color-text;
+      }
+    }
+    strong {
+      font-weight: 400;
+    }
+  }
+  &__pay-methods {
+    display: grid;
+    gap: $size * 2;
+  }
+  &__pay-method {
+    padding: $size * 2;
+    border-radius: $size;
+    border: 1px solid $color-bg-card;
+    color: $color-text-light;
+    cursor: pointer;
+    &:hover,
+    &.active {
+      border-color: $color-btn;
+      color: $color-text;
+    }
+  }
+}
