@@ -54,7 +54,7 @@ const Filter: ReactFC<IFilterProps> = ({
                 ...range,
                 [name]: /^\d{0,7}$/.test(e.target.value)
                   ? +e.target.value
-                  : [name],
+                  : range[name],
               })
             }}
             onKeyUp={({ key }) => (key === 'Enter' ? onChange(range) : false)}
