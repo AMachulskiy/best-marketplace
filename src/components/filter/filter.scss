@@ -37,10 +37,11 @@
     width: $size * 4;
     height: $size * 4;
     border-radius: $size;
+    outline: 1px solid $color-bg-card;
     position: relative;
-    &:hover:after {
+    cursor: pointer;
+    &.selected:after {
       $offset: -4px;
-      cursor: pointer;
       content: '';
       display: block;
       position: absolute;
