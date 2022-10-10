@@ -25,7 +25,7 @@ const Favorite: ReactFC = () => {
     const filtered = products.filter((product) => {
       return (
         reg.test(product.name) ||
-        reg.test(product.brand) ||
+        reg.test(product.brand.label) ||
         reg.test(ColorsEnum[product.color])
       )
     })

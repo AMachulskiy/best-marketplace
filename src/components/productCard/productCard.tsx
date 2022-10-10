@@ -71,8 +71,8 @@ const ProductCard: ReactFC<IProductCardProps> = ({ product }) => {
           <span>{originalPrice} ₽</span>
         </div>
         <div className='product-card__params'>
-          {product.brand} / {product.name} / {product.ram} / {product.ssd} /{' '}
-          {ColorsEnum[product.color]}
+          {product.brand.label} / {product.name} / {product.ram} / {product.ssd}{' '}
+          / {ColorsEnum[product.color]}
         </div>
         <div className='product-card__rating'>
           {renderRating(product.rating)}
