@@ -44,7 +44,7 @@ const ProductPage: ReactFC = () => {
     <div className='product-page'>
       <Breadcrumbs data={getBreadcrumbsData()} />
       <h3 className='product__title'>
-        {product.brand} / {product.name} / {product.ram} / {product.ssd} /{' '}
+        {product.brand.label} / {product.name} / {product.ram} / {product.ssd} /{' '}
         {product.color}
       </h3>
       <div className='product__statistic'>

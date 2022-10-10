@@ -83,7 +83,7 @@ const OrderCard: ReactFC<IOrderCardProps> = ({
           </div>
         </div>
         <div className='order-card__params'>
-          {product.brand} / {product.name} / {ColorsEnum[product.color]}
+          {product.brand.label} / {product.name} / {ColorsEnum[product.color]}
         </div>
         <div className='order-card__date'>
           <span>Заказ:</span>

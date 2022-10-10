@@ -3,16 +3,16 @@ import { ReactFC } from '@src/interfaces/react'
 import IProduct from '@src/interfaces/product'
 import ProductCard from '@src/components/productCard/productCard'
 import CustomPagination from '@src/components/pagination/pagination'
-import generateProducts from '@src/data/products'
+import { useAppSelector } from '@src/hooks/redux'
 
 import './subCategoryPage.scss'
 
 const SubCategoryPage: ReactFC = () => {
+  const { filteredProducts } = useAppSelector((state) => state.products)
   const renderProducts = (num: number) => {
-    const productsData = generateProducts(num)
     const products: ReactNode[] = []
-    productsData.forEach((productData: IProduct) => {
-      products.push(<ProductCard key={productData.id} product={productData} />)
+    filteredProducts.forEach((product: IProduct) => {
+      products.push(<ProductCard key={product.id} product={product} />)
     })
     return products
   }
@@ -36,8 +36,19 @@ const SubCategoryPage: ReactFC = () => {
           <i className='ic_view-1' />
         </div>
       </div>
-      <div className='sub-category-page__products'>{renderProducts(16)}</div>
-      <CustomPagination />
+      {!!filteredProducts.length && (
+        <>
+          <div className='sub-category-page__products'>
+            {renderProducts(16)}
+          </div>
+          <CustomPagination />
+        </>
+      )}
+      {!filteredProducts.length && (
+        <h3>
+          По заданным параметрам товары не найдены. Измените критерии поиска.
+        </h3>
+      )}
     </>
   )
 }

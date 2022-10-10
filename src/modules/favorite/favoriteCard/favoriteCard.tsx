@@ -59,7 +59,7 @@ const FavoriteCard: ReactFC<IFavoriteCardProps> = ({
           <span>{originalPrice} ₽</span>
         </div>
         <div className='favorite-card__params'>
-          {product.brand} / {product.name} / {ColorsEnum[product.color]}
+          {product.brand.label} / {product.name} / {ColorsEnum[product.color]}
         </div>
         <div className='favorite-card__actions'>
           <div className='favorite-card__bay' onClick={addToCart}>
