@@ -5,6 +5,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: $size * 2;
+    margin-top: $size * 7;
     &_3-col {
       grid-template-columns: repeat(3, 1fr);
     }
@@ -13,12 +14,11 @@
     }
   }
 }
-
 .sort {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 72px;
+  margin-bottom: $size * 2;
   &__actions {
     display: flex;
     gap: $size * 2;
