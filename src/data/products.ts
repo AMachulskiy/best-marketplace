@@ -1,11 +1,26 @@
+import { ICheckRadio } from '@src/interfaces/filters'
 import IProduct from '@src/interfaces/product'
 import moment from 'moment'
+
+const brands: ICheckRadio[] = [
+  { id: 1, label: 'Dell', value: 'dell' },
+  { id: 2, label: 'Lenovo', value: 'lenovo' },
+  { id: 3, label: 'HP', value: 'hp' },
+  { id: 4, label: 'Apple', value: 'apple' },
+  { id: 5, label: 'Acer', value: 'acer' },
+  { id: 6, label: 'Asus', value: 'asus' },
+  { id: 7, label: 'Huawei', value: 'huawei' },
+  { id: 8, label: 'Fujitsu', value: 'fujitsu' },
+  { id: 9, label: 'Samsung', value: 'samsung' },
+  { id: 10, label: 'Sony', value: 'sony' },
+  { id: 11, label: 'Alienware', value: 'alienware' },
+  { id: 12, label: 'Gigabyte', value: 'gigabyte' },
+]
 
 const generateProducts = (num: number) => {
   const products: IProduct[] = []
   for (let i = 0; i < num; i++) {
     const names = ['IPhone 13 Pro', 'MacBook Pro 16', 'Super TV']
-    const brands = ['Apple', 'Samsung', 'Electronica']
     const colors = ['black', 'blue', 'green', 'yellow', 'red', 'white']
     const nameId = Math.floor(Math.random() * names.length)
     const brandsId = Math.floor(Math.random() * brands.length)
