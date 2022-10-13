@@ -9,7 +9,7 @@ import './subCategoryPage.scss'
 
 const SubCategoryPage: ReactFC = () => {
   const { filteredProducts } = useAppSelector((state) => state.products)
-  const renderProducts = (num: number) => {
+  const renderProducts = () => {
     const products: ReactNode[] = []
     filteredProducts.forEach((product: IProduct) => {
       products.push(<ProductCard key={product.id} product={product} />)
@@ -38,9 +38,7 @@ const SubCategoryPage: ReactFC = () => {
       </div>
       {!!filteredProducts.length && (
         <>
-          <div className='sub-category-page__products'>
-            {renderProducts(16)}
-          </div>
+          <div className='sub-category-page__products'>{renderProducts()}</div>
           <CustomPagination />
         </>
       )}
