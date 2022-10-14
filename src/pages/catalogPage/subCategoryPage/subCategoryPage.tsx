@@ -3,18 +3,69 @@ import { ReactFC } from '@src/interfaces/react'
 import IProduct from '@src/interfaces/product'
 import ProductCard from '@src/components/productCard/productCard'
 import CustomPagination from '@src/components/pagination/pagination'
-import { useAppSelector } from '@src/hooks/redux'
+import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
+import SortTypeEnum from '@src/interfaces/sort'
+import sortHelpers from '@src/helpers/sortHelpers'
+import {
+  changeSortType,
+  changeViewType,
+} from '@src/store/productsStore/productsStore'
 
 import './subCategoryPage.scss'
 
 const SubCategoryPage: ReactFC = () => {
-  const { filteredProducts } = useAppSelector((state) => state.products)
+  const dispatch = useAppDispatch()
+  const { filteredProducts, sortType, viewType } = useAppSelector(
+    (state) => state.products
+  )
+  const isPriceSortType =
+    sortType === SortTypeEnum.priceUp || sortType === SortTypeEnum.priceDown
+
   const renderProducts = (num: number) => {
     const products: ReactNode[] = []
-    filteredProducts.forEach((product: IProduct) => {
+    const sortFilteredProducts = sortHelpers.sortProducts(
+      sortType,
+      filteredProducts
+    )
+    sortFilteredProducts.forEach((product: IProduct) => {
       products.push(<ProductCard key={product.id} product={product} />)
     })
     return products
+  }
+
+  const setSortType = (type: SortTypeEnum) => {
+    if (type === SortTypeEnum.priceUp) {
+      dispatch(changeSortType(SortTypeEnum.priceDown))
+    } else if (type === SortTypeEnum.priceDown) {
+      dispatch(changeSortType(SortTypeEnum.priceUp))
+    } else {
+      dispatch(changeSortType(type))
+    }
+  }
+
+  const renderSortItems = () => {
+    const sortTypes = [
+      { name: 'Популярности', type: SortTypeEnum.popular },
+      { name: 'Рейтингу', type: SortTypeEnum.rating },
+      { name: 'Цене', type: isPriceSortType ? sortType : SortTypeEnum.priceUp },
+      { name: 'Скидке', type: SortTypeEnum.sale },
+      { name: 'Обновлению', type: SortTypeEnum.update },
+    ]
+    return sortTypes.map(({ name, type }) => {
+      const cls = type === sortType ? 'sort__action active' : 'sort__action'
+      const iconClass =
+        type === SortTypeEnum.priceUp ? 'ic_arrow-up' : 'ic_arrow-down'
+      return (
+        <div key={type} className={cls} onClick={() => setSortType(type)}>
+          <span>{name}</span>
+          {name === 'Цене' && <i className={iconClass} />}
+        </div>
+      )
+    })
+  }
+
+  const setViewType = (type: 'small' | 'big') => {
+    dispatch(changeViewType(type))
   }
 
   return (
@@ -22,23 +73,26 @@ const SubCategoryPage: ReactFC = () => {
       <div className='sort'>
         <div className='sort__actions'>
           <span className='sort__actions-label'>Сортировка по:</span>
-          <div className='sort__action active'>Популярности</div>
-          <div className='sort__action'>Рейтингу</div>
-          <div className='sort__action'>
-            <span>Цене</span>
-            <i className='ic_left-arrow' />
-          </div>
-          <div className='sort__action'>Скидке</div>
-          <div className='sort__action'>Обновлению</div>
+          {renderSortItems()}
         </div>
         <div className='sort__view'>
-          <i className='ic_view-2 active' />
-          <i className='ic_view-1' />
+          <i
+            className={`ic_view-2 ${viewType === 'small' ? 'active' : ''}`}
+            onClick={() => setViewType('small')}
+          />
+          <i
+            className={`ic_view-1 ${viewType === 'big' ? 'active' : ''}`}
+            onClick={() => setViewType('big')}
+          />
         </div>
       </div>
       {!!filteredProducts.length && (
         <>
-          <div className='sub-category-page__products'>
+          <div
+            className={`sub-category-page__products ${
+              viewType === 'big' ? 'big' : ''
+            }`}
+          >
             {renderProducts(16)}
           </div>
           <CustomPagination />
