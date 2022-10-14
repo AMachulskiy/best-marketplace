@@ -53,6 +53,9 @@
     font-size: 14px;
     margin: $size 0;
   }
+  &__sold-count {
+    font-size: 12px;
+  }
   &__rating {
     margin-bottom: $size - 4;
     display: flex;
