@@ -1,6 +1,7 @@
 import functionHelpers from '@src/helpers/functionHelpers'
 import IProduct, { ColorsEnum } from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
+import moment from 'moment'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -87,11 +88,11 @@ const OrderCard: ReactFC<IOrderCardProps> = ({
         </div>
         <div className='order-card__date'>
           <span>Заказ:</span>
-          <strong>{product.orderDate.format('D MMMM')}</strong>
+          <strong>{moment(product.orderDate).format('D MMMM')}</strong>
         </div>
         <div className='order-card__date'>
           <span>Получение:</span>
-          <strong>{product.getDate.format('D MMMM')}</strong>
+          <strong>{moment(product.getDate).format('D MMMM')}</strong>
         </div>
         {isRefund && (
           <div className='order-card__refund'>На оформлении возврата</div>

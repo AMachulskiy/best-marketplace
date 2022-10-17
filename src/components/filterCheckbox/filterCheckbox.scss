@@ -1,0 +1,54 @@
+@import '../../styles/settings.scss';
+
+.filter-checkbox {
+  &.close {
+    .filter-checkbox__close-btn {
+      transform: rotate(135deg);
+    }
+    .filter-checkbox__content {
+      display: none;
+    }
+  }
+  &__head {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $size * 2;
+    span {
+      font-weight: 700;
+    }
+  }
+  &__reset {
+    color: $color-text-light;
+    font-size: 14px;
+    font-weight: 400 !important;
+    margin-right: auto;
+    margin-left: $size * 2;
+    border-bottom: 1px dashed $color-text-light;
+  }
+  &__close-btn {
+    cursor: pointer;
+    width: $size;
+    height: $size;
+    border-top: 2px solid $color-text-light;
+    border-right: 2px solid $color-text-light;
+    transform: rotate(-45deg);
+    transition: all 0.3s ease-in-out;
+  }
+  &__search {
+    margin-bottom: $size;
+  }
+  &__more {
+    cursor: pointer;
+    font-size: 14px;
+    color: $color-text-light;
+    display: inline-block;
+    border-bottom: 1px dashed $color-text-light;
+  }
+  &__list-content {
+    max-height: 200px;
+    overflow: auto;
+    padding-left: $size - 4;
+  }
+}

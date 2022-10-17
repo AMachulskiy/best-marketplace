@@ -1,9 +1,12 @@
+import React from 'react'
+import { ReactFC } from '@src/interfaces/react'
 import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
 import { ICheckRadio, IColor, IRange } from '@src/interfaces/filters'
-import { ReactFC } from '@src/interfaces/react'
 import { setFilters } from '@src/store/productsStore/productsStore'
-import React from 'react'
-import Filter from '../filter/filter'
+import FilterCheckbox from '../filterCheckbox/filterCheckbox'
+import FilterColor from '../filterColor/filterColor'
+import FilterRadio from '../filterRadio/filterRadio'
+import FilterRange from '../filterRange/filterRange'
 
 import './filters.scss'
 
@@ -60,33 +63,38 @@ const Filters: ReactFC = () => {
     )
   }
 
+  const onReset = (filter: 'colors' | 'sale' | 'brands') => {
+    dispatch(
+      setFilters({
+        ...selectedFilters,
+        [filter]: filter === 'sale' ? null : [],
+      })
+    )
+  }
+
   return (
     <div className='filters'>
-      <Filter
+      <FilterColor
         label='Цвет'
-        type='color'
         data={filters.colors}
         selectedData={selectedFilters.colors}
         onChange={changeColor}
+        onReset={() => onReset('colors')}
       />
-      <Filter
-        label='Цена'
-        type='range'
-        data={filters.price}
-        onChange={changePrice}
-      />
-      <Filter
+      <FilterRange label='Цена' data={filters.price} onChange={changePrice} />
+      <FilterRadio
         label='Скидка'
-        type='radio'
         data={saleData}
+        selectedData={selectedFilters.sale}
         onChange={changeSale}
+        onReset={() => onReset('sale')}
       />
-      <Filter
+      <FilterCheckbox
         label='Бренды'
-        type='checkbox'
         data={filters.brands}
         selectedData={selectedFilters.brands}
         onChange={changeBrand}
+        onReset={() => onReset('brands')}
       />
     </div>
   )
