@@ -65,7 +65,7 @@ const AccountCard: ReactFC<IAccountProps> = ({
     const elements = []
     for (let i = 0; i < products.length && i < 8; i++) {
       elements.push(
-        <div className='account-card__product'>
+        <div key={i} className='account-card__product'>
           {i < 7 && <img src={products[i].cover} alt={products[i].name} />}
           {i === 7 && <strong>+{products.length}</strong>}
         </div>

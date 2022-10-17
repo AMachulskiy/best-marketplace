@@ -52,12 +52,12 @@ const generateProducts = (num: number) => {
       shipTime: 3,
       credit: 'РАССРОЧКА ОТ 0-0-6!',
       isAvailable: !!Math.round(Math.random()),
-      addToFavoriteDate: date,
+      addToFavoriteDate: +date,
       selectedColor: 'black',
       selectedCount: 1,
       checked: true,
-      orderDate: date,
-      getDate: date.add(3, 'day'),
+      orderDate: +date,
+      getDate: +date.add(3, 'day'),
       orderStatus: Math.floor(Math.random() * 5),
     }
     products.push(productData)

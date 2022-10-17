@@ -1,0 +1,31 @@
+@import '../../styles/settings.scss';
+
+.filter-range {
+  &.close {
+    .filter-range__close-btn {
+      transform: rotate(135deg);
+    }
+    .filter-range__content {
+      display: none;
+    }
+  }
+  &__head {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $size * 2;
+    span {
+      font-weight: 700;
+    }
+  }
+  &__close-btn {
+    cursor: pointer;
+    width: $size;
+    height: $size;
+    border-top: 2px solid $color-text-light;
+    border-right: 2px solid $color-text-light;
+    transform: rotate(-45deg);
+    transition: all 0.3s ease-in-out;
+  }
+}
