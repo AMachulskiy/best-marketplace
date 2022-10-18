@@ -6,7 +6,7 @@
     grid-template-columns: repeat(4, 1fr);
     gap: $size * 2;
     margin-top: $size * 7;
-    &_3-col {
+    &.big {
       grid-template-columns: repeat(3, 1fr);
     }
     > * {
@@ -36,7 +36,6 @@
     i {
       font-size: 0.7em;
       display: inline-block;
-      transform: rotate(-90deg);
       margin-left: $size - 4;
       font-weight: 700;
     }

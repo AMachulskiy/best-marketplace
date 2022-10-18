@@ -74,12 +74,19 @@ const ProductCard: ReactFC<IProductCardProps> = ({ product }) => {
           {product.brand.label} / {product.name} / {product.ram} / {product.ssd}{' '}
           / {ColorsEnum[product.color]}
         </div>
+        <div className='product-card__sold-count'>
+          Продано: {product.soldCount} шт.
+        </div>
         <div className='product-card__rating'>
           {renderRating(product.rating)}
         </div>
         <div className='product-card__shipping'>
           <span>Доставка:&nbsp;</span>
           <strong>{shipDate}</strong>
+        </div>
+        <div className='product-card__shipping'>
+          <span>Обновлен:&nbsp;</span>
+          <strong>{moment(product.updated).format('DD.MM.YYYY')}</strong>
         </div>
         <div className='product-card__credit'>{product.credit}</div>
         <div className='product-card__actions'>

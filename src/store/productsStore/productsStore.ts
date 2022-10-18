@@ -6,6 +6,7 @@ import {
   IProductsSelectedFilters,
 } from '@src/interfaces/filters'
 import IProduct from '@src/interfaces/product'
+import SortTypeEnum from '@src/interfaces/sort'
 
 const products = generateProducts(50)
 const filters = filterHelpers.getFilters(products)
@@ -16,6 +17,8 @@ interface IProductsState {
   products: IProduct[]
   partFilteredProducts: IProduct[]
   filteredProducts: IProduct[]
+  sortType: SortTypeEnum
+  viewType: 'small' | 'big'
 }
 
 const initialState: IProductsState = {
@@ -29,6 +32,8 @@ const initialState: IProductsState = {
   products,
   partFilteredProducts: products,
   filteredProducts: products,
+  sortType: SortTypeEnum.popular,
+  viewType: 'small',
 }
 
 const productsStore = createSlice({
@@ -48,8 +53,15 @@ const productsStore = createSlice({
         false
       )
     },
+    changeSortType: (state, action: PayloadAction<SortTypeEnum>) => {
+      state.sortType = action.payload
+    },
+    changeViewType: (state, action: PayloadAction<'small' | 'big'>) => {
+      state.viewType = action.payload
+    },
   },
 })
 
 export default productsStore
-export const { setFilters } = productsStore.actions
+export const { setFilters, changeSortType, changeViewType } =
+  productsStore.actions
