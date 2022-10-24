@@ -28,7 +28,7 @@ const MainPageSlider: ReactFC = () => {
       {[1, 2, 3, 4, 5].map((item) => (
         <SwiperSlide key={item} className='main-page-slider__slide'>
           <img
-            src={`https://placeimg.com/1920/300/tech?id=${item}`}
+            src={`https://placeimg.com/1920/1080/tech?id=${item}`}
             alt='Main page slide'
           />
         </SwiperSlide>
