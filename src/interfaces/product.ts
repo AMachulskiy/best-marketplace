@@ -1,4 +1,3 @@
-import { Moment } from 'moment'
 import orderFilterTypeEnum, { ICheckRadio } from './filters'
 import IRating from './rating'
 
@@ -52,8 +51,8 @@ interface IProduct {
   innerSubCategory?: string
   warehouse?: string
   selectedColor?: keyof typeof ColorsEnum
-  selectedCount: number
-  checked: boolean
+  selectedCount?: number
+  inOrder?: boolean
   isAvailable: boolean
   addToFavoriteDate: number
   orderDate?: number
@@ -61,6 +60,7 @@ interface IProduct {
   orderStatus?: orderFilterTypeEnum
   soldCount: number
   updated: number
+  isRefund?: boolean
 }
 
 export default IProduct
