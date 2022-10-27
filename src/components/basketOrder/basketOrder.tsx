@@ -1,6 +1,12 @@
 import functionHelpers from '@src/helpers/functionHelpers'
+import priceHelpers from '@src/helpers/priceHelpers'
+import shippingHelpers from '@src/helpers/shippingHelpers'
+import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
+import { PaymentTypeValue } from '@src/interfaces/payment'
 import { ReactFC } from '@src/interfaces/react'
-import moment, { Moment } from 'moment'
+import { ShippingTypeValueEnum } from '@src/interfaces/shipping'
+import { checkWarnings, completeOrder } from '@src/store/userStore/userStore'
+import moment from 'moment'
 import React from 'react'
 import Button from '../button/button'
 
@@ -8,44 +14,36 @@ import './basketOrder.scss'
 
 moment.locale('ru')
 
-export interface IBasketOrderProps {
-  fullPrice: number
-  price: number
-  count: number
-  sale: number
-  shipType: string
-  shipAddress: string
-  shipRangeDate: {
-    from: Moment
-    to: Moment
-  }
-  payMethod: string
-  onWarning: () => void
-}
+const BasketOrder: ReactFC = () => {
+  const dispatch = useAppDispatch()
+  const { basket, shipping, paymentType } = useAppSelector(
+    (state) => state.user
+  )
 
-const BasketOrder: ReactFC<IBasketOrderProps> = ({
-  fullPrice,
-  price,
-  count,
-  sale,
-  shipType,
-  shipAddress,
-  shipRangeDate,
-  payMethod,
-  onWarning,
-}) => {
+  const onlyOrderProducts = basket.filter((product) => product.inOrder)
+  const { min, max } = shippingHelpers.getMinMaxShippingTime(onlyOrderProducts)
+  const shipRangeDate = {
+    from: moment().add(min, 'day'),
+    to: moment().add(max, 'day'),
+  }
+  const { count, fullPrice, salePrice, saleSize } =
+    priceHelpers.getOrderInfo(basket)
   const checkOrderSettings = () => {
-    if (shipAddress && payMethod) {
+    if (shipping.address && paymentType) {
+      dispatch(completeOrder())
       alert('Оплата прошла успешно!')
+    } else {
+      dispatch(checkWarnings())
     }
-    onWarning()
   }
 
   return (
     <div className='basket-order'>
       <div className='basket-order__price'>
         <strong>Итого</strong>
-        {!!price && <strong>{functionHelpers.getDigitNumber(price)} ₽</strong>}
+        {!!salePrice && (
+          <strong>{functionHelpers.getDigitNumber(salePrice)} ₽</strong>
+        )}
       </div>
       <div className='basket-order__price-info'>
         <div>
@@ -54,10 +52,10 @@ const BasketOrder: ReactFC<IBasketOrderProps> = ({
             <span>{functionHelpers.getDigitNumber(fullPrice)} ₽</span>
           )}
         </div>
-        {!!sale && (
+        {!!saleSize && (
           <div>
             <span>Скидка</span>
-            <span>{functionHelpers.getDigitNumber(sale)} ₽</span>
+            <span>- {functionHelpers.getDigitNumber(saleSize)} ₽</span>
           </div>
         )}
         <div>
@@ -69,21 +67,23 @@ const BasketOrder: ReactFC<IBasketOrderProps> = ({
         <div className='basket-order__info'>
           <strong>Доставка:</strong>
           <span onClick={() => functionHelpers.scrollToElement('ship-type')}>
-            {shipType}
+            {ShippingTypeValueEnum[shipping.type]}
           </span>
-          <div>{shipAddress}</div>
+          {shipping.address && <div>{shipping.address}</div>}
         </div>
         <div className='basket-order__info'>
           <strong>Дата:</strong>
-          <span onClick={() => functionHelpers.scrollToElement('ship-type')}>
-            {shipRangeDate.from.format('D')} -{' '}
-            {shipRangeDate.to.format('D MMMM')}
-          </span>
+          {!!basket.length && (
+            <span onClick={() => functionHelpers.scrollToElement('ship-type')}>
+              {shipRangeDate.from.format('D')} -{' '}
+              {shipRangeDate.to.format('D MMMM')}
+            </span>
+          )}
         </div>
         <div className='basket-order__info'>
           <strong>Оплата:</strong>
           <span onClick={() => functionHelpers.scrollToElement('pay-method')}>
-            {payMethod}
+            {PaymentTypeValue[paymentType]}
           </span>
         </div>
         <Button onClick={checkOrderSettings}>Оплатить заказ</Button>
