@@ -1,40 +1,32 @@
 import { ReactFC } from '@src/interfaces/react'
 import routing from '@src/routes/routes'
 import React from 'react'
-import IProduct from '@src/interfaces/product'
-import generateProducts from '@src/data/products'
+import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
+import { changeNotificationStatus } from '@src/store/userStore/userStore'
 import AccountCard from './accountCard/accountCard'
 
 import './account.scss'
 
-const product: IProduct = generateProducts(1)[0]
-
-const getProducts = (count: number): IProduct[] => {
-  const products: IProduct[] = []
-  for (let i = 0; i < count; i++) {
-    products.push({
-      ...product,
-      id: i,
-      cover: `https://placeimg.com/100/100/tech?id=${i}`,
-    })
-  }
-  return products
-}
-
-const buyProductsData = getProducts(5)
-const favoriteProductsData = getProducts(138)
-
 const Account: ReactFC = () => {
+  const dispatch = useAppDispatch()
+  const {
+    data: { name, lastname, phone },
+    isNotification,
+    bayed,
+    favorite,
+  } = useAppSelector((state) => state.user)
+
   return (
     <div className='account'>
       <div className='account__row1'>
         <AccountCard
           link={routing.account.profile}
-          title='Мачульский Алексей'
+          title={`${name} ${lastname}`}
           subTitle='Подтвердить аккаунт'
           label='Телефон'
-          text='+7 (911) 778-88-88'
-          onNotification={() => alert('Уведомления включены')}
+          text={phone}
+          onNotification={() => dispatch(changeNotificationStatus())}
+          isNotification={isNotification}
           logout
           isBig
         />
@@ -83,19 +75,17 @@ const Account: ReactFC = () => {
           link={routing.account.orders}
           title='Покупки'
           label='всего товаров'
-          text={String(buyProductsData.length)}
-          products={buyProductsData}
+          text={String(bayed.length)}
+          products={bayed}
         />
         <AccountCard
           link={routing.account.favorites}
           title='Избранное'
           label='доступно к заказу'
           text={String(
-            favoriteProductsData.length > 3
-              ? favoriteProductsData.length - 3
-              : favoriteProductsData.length
+            favorite.filter((product) => product.isAvailable).length
           )}
-          products={favoriteProductsData}
+          products={favorite}
         />
       </div>
     </div>
