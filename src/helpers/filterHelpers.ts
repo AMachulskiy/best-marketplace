@@ -3,7 +3,7 @@ import {
   IProductsSelectedFilters,
 } from '@src/interfaces/filters'
 import IProduct from '@src/interfaces/product'
-import functionHelpers from './functionHelpers'
+import priceHelpers from './priceHelpers'
 
 const filterHelpers = {
   getFilters: (products: IProduct[]) => {
@@ -18,7 +18,7 @@ const filterHelpers = {
     }
     const filtersData = products.reduce(
       (filters, product): IProductsFilters => {
-        const productPrice = functionHelpers.getSalePrice(
+        const productPrice = priceHelpers.getSalePrice(
           product.price,
           product.sale
         )
@@ -59,7 +59,7 @@ const filterHelpers = {
     } = filter
 
     const filteredProducts = products.filter((product) => {
-      const productPrice = functionHelpers.getSalePrice(
+      const productPrice = priceHelpers.getSalePrice(
         product.price,
         product.sale
       )
