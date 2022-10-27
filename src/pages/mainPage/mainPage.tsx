@@ -29,7 +29,9 @@ const MainPage: ReactFC = () => {
     const productsData = generateProducts(num)
     const products: ReactNode[] = []
     productsData.forEach((productData: IProduct) => {
-      products.push(<MiniProductCard product={productData} />)
+      products.push(
+        <MiniProductCard key={productData.id} product={productData} />
+      )
     })
     return products
   }
