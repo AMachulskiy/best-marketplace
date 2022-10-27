@@ -46,5 +46,6 @@ module.exports = {
     'jsx-a11y/click-events-have-key-events': 'off',
     'no-param-reassign': 'off',
     'no-undef': 'off',
+    'no-plusplus': 'off',
   },
 }
