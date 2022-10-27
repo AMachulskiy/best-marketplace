@@ -1,6 +1,9 @@
 import functionHelpers from '@src/helpers/functionHelpers'
+import priceHelpers from '@src/helpers/priceHelpers'
+import { useAppDispatch } from '@src/hooks/redux'
 import IProduct, { ColorsEnum } from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
+import { hideProductFromBayed, toRefund } from '@src/store/userStore/userStore'
 import moment from 'moment'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -10,17 +13,12 @@ import './orderCard.scss'
 export interface IOrderCardProps {
   product: IProduct
   addReview: (id: number) => void
-  onHide: (id: number) => void
 }
 
-const OrderCard: ReactFC<IOrderCardProps> = ({
-  product,
-  addReview,
-  onHide,
-}) => {
+const OrderCard: ReactFC<IOrderCardProps> = ({ product, addReview }) => {
+  const dispatch = useAppDispatch()
   const [menuIsOpen, setMenuIsOpen] = useState(false)
-  const [isRefund, setIsRefund] = useState(false)
-  let priceWithSale: string | number = functionHelpers.getSalePrice(
+  let priceWithSale: string | number = priceHelpers.getSalePrice(
     product.price,
     product.sale
   )
@@ -41,14 +39,14 @@ const OrderCard: ReactFC<IOrderCardProps> = ({
   const addToRefund = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
+    dispatch(toRefund(product.id))
     setMenuIsOpen(false)
-    setIsRefund(true)
   }
 
-  const onHideProduct = (e: React.MouseEvent) => {
+  const hideProduct = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    onHide(product.id)
+    dispatch(hideProductFromBayed(product.id))
   }
 
   return (
@@ -71,10 +69,10 @@ const OrderCard: ReactFC<IOrderCardProps> = ({
             <div
               className={`order-card__menu-popup ${menuIsOpen ? 'open' : ''}`}
             >
-              <div onClick={onHideProduct}>
+              <div onClick={hideProduct}>
                 <span>Не показывать в покупках</span>
               </div>
-              {!isRefund && (
+              {!product.isRefund && (
                 <div onClick={addToRefund}>
                   <span>Оформить возврат -</span> <strong>100 ₽</strong>
                 </div>
@@ -94,7 +92,7 @@ const OrderCard: ReactFC<IOrderCardProps> = ({
           <span>Получение:</span>
           <strong>{moment(product.getDate).format('D MMMM')}</strong>
         </div>
-        {isRefund && (
+        {product.isRefund && (
           <div className='order-card__refund'>На оформлении возврата</div>
         )}
         <div className='order-card__actions'>
