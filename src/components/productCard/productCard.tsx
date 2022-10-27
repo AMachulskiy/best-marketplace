@@ -1,9 +1,12 @@
 import functionHelpers from '@src/helpers/functionHelpers'
+import priceHelpers from '@src/helpers/priceHelpers'
+import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
 import IProduct, { ColorsEnum } from '@src/interfaces/product'
 import IRating from '@src/interfaces/rating'
 import { ReactFC } from '@src/interfaces/react'
+import { addToBasket, addToFavorite } from '@src/store/userStore/userStore'
 import moment from 'moment'
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 import './productCard.scss'
@@ -13,9 +16,10 @@ export interface IProductCardProps {
 }
 
 const ProductCard: ReactFC<IProductCardProps> = ({ product }) => {
-  const [toFavorite, setToFavorite] = useState(false)
+  const dispatch = useAppDispatch()
+  const { favorite } = useAppSelector((state) => state.user)
   const originalPrice = functionHelpers.getDigitNumber(product.price)
-  let priceWithSale: string | number = functionHelpers.getSalePrice(
+  let priceWithSale: string | number = priceHelpers.getSalePrice(
     product.price,
     product.sale
   )
@@ -45,12 +49,13 @@ const ProductCard: ReactFC<IProductCardProps> = ({ product }) => {
   const toFavoriteHandle = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    setToFavorite(!toFavorite)
+    dispatch(addToFavorite(product))
   }
 
   const addToCart = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
+    dispatch(addToBasket(product))
     alert('Товар добавлен в корзину!')
   }
 
@@ -95,7 +100,11 @@ const ProductCard: ReactFC<IProductCardProps> = ({ product }) => {
           </div>
           <div className='product-card__favorite'>
             <i
-              className={toFavorite ? 'ic_like-2' : 'ic_heart'}
+              className={
+                favorite.some((p) => p.id === product.id)
+                  ? 'ic_like-2'
+                  : 'ic_heart'
+              }
               onClick={toFavoriteHandle}
             />
           </div>
