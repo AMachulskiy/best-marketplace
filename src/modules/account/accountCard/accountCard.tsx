@@ -2,8 +2,8 @@ import functionHelpers from '@src/helpers/functionHelpers'
 import IProduct from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
 import routing from '@src/routes/routes'
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 import './accountCard.scss'
 
@@ -19,6 +19,7 @@ interface IAccountProps {
     buySum: number
   }
   onNotification?: () => void
+  isNotification?: boolean
   logout?: boolean
   gradient?: boolean
   icon?: JSX.Element
@@ -34,13 +35,14 @@ const AccountCard: ReactFC<IAccountProps> = ({
   products,
   sale,
   onNotification,
+  isNotification,
   logout,
   gradient,
   icon,
   isBig,
   link,
 }) => {
-  const [isNotification, setIsNotification] = useState(false)
+  const navigate = useNavigate()
   let cls = 'account-card'
   let imgContent: string | JSX.Element = title.charAt(0)
 
@@ -54,11 +56,10 @@ const AccountCard: ReactFC<IAccountProps> = ({
     cls += ' gradient'
   }
 
-  const handleNotification = () => {
-    setIsNotification(!isNotification)
-    if (!isNotification) {
-      onNotification()
-    }
+  const handleNotification = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    onNotification()
   }
 
   const renderProducts = () => {
@@ -72,6 +73,11 @@ const AccountCard: ReactFC<IAccountProps> = ({
       )
     }
     return elements
+  }
+
+  const handleLogout = (e: React.MouseEvent) => {
+    e.preventDefault()
+    navigate(routing.home)
   }
 
   return (
@@ -108,9 +114,9 @@ const AccountCard: ReactFC<IAccountProps> = ({
           {text && <strong>{text}</strong>}
         </div>
         {logout && (
-          <Link to={routing.home} className='account-card__link'>
+          <span onClick={handleLogout} className='account-card__link'>
             Выйти
-          </Link>
+          </span>
         )}
       </div>
       {sale && (

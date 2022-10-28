@@ -1,18 +1,16 @@
 import { ColorsEnum } from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
 import React, { useEffect, useState } from 'react'
-import generateProducts from '@src/data/products'
 import orderFilterTypeEnum from '@src/interfaces/filters'
+import { useAppSelector } from '@src/hooks/redux'
 import OrdersPageActions from './ordersPageActions/ordersPageActions'
 import OrderCard from './orderCard/orderCard'
 
 import './ordersPageContent.scss'
 
-const productsData = generateProducts(30)
-
 const OrdersPageContent: ReactFC = () => {
-  const [products, setProducts] = useState(productsData)
-  const [filteredProducts, setfilteredProducts] = useState(products)
+  const { bayed } = useAppSelector((state) => state.user)
+  const [filteredProducts, setfilteredProducts] = useState(bayed)
   const [statusType, setStatusType] = useState<orderFilterTypeEnum>(
     orderFilterTypeEnum.all
   )
@@ -20,22 +18,20 @@ const OrdersPageContent: ReactFC = () => {
   const onFiltering = (type: orderFilterTypeEnum) => {
     setStatusType(type)
     if (type) {
-      const foltered = products.filter(
-        (product) => product.orderStatus === type
-      )
+      const foltered = bayed.filter((product) => product.orderStatus === type)
       setfilteredProducts(foltered)
     } else {
-      setfilteredProducts(products)
+      setfilteredProducts(bayed)
     }
   }
 
   useEffect(() => {
     onFiltering(statusType)
-  }, [products])
+  }, [bayed])
 
   const onSearch = (value: string) => {
     const reg = new RegExp(value, 'i')
-    const filtered = products.filter((product) => {
+    const filtered = bayed.filter((product) => {
       return (
         reg.test(product.name) ||
         reg.test(product.brand.label) ||
@@ -47,11 +43,6 @@ const OrdersPageContent: ReactFC = () => {
 
   const addReview = (id: number) => {
     alert('Добавление отзыва!')
-  }
-
-  const onHideProduct = (id: number) => {
-    const updatedProducts = products.filter((product) => product.id !== id)
-    setProducts(updatedProducts)
   }
 
   return (
@@ -66,7 +57,6 @@ const OrdersPageContent: ReactFC = () => {
                 key={product.id}
                 product={product}
                 addReview={addReview}
-                onHide={onHideProduct}
               />
             ))}
           </div>

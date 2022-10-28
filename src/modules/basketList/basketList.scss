@@ -1,38 +1,39 @@
 @import '../../styles/settings.scss';
 
 .basket-list {
-    &__head {
-        padding: $size * 2 0;
-        margin-bottom: $size * 2;
-        border-bottom: 3px solid $color-bg-card;
+  &__head {
+    padding: $size * 2 0;
+    margin-bottom: $size * 2;
+    border-bottom: 3px solid $color-bg-card;
+  }
+  &__check-all {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: $size;
+  }
+  &__close {
+    cursor: pointer;
+    height: $size * 3;
+    width: $size * 3;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 0;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+  }
+  &__products {
+    display: grid;
+    gap: $size * 2;
+    max-height: 2000px;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+    &.hide {
+      max-height: 0;
     }
-    &__check-all {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    &__close {
-        cursor: pointer;
-        height: $size * 3;
-        width: $size * 3;
-        font-size: 24px;
-        font-weight: 700;
-        line-height: 0;
-        display: grid;
-        align-items: center;
-        justify-items: center;
-    }
-    &__products {
-        display: grid;
-        gap: $size * 2;
-        max-height: 2000px;
-        transition: all 0.3s ease-in-out;
-        overflow: hidden;
-        &.hide {
-            max-height: 0;
-        }
-    }
-    &__order {
-        font-weight: 600;
-    } 
+  }
+  &__order {
+    font-weight: 600;
+  }
 }

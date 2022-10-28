@@ -1,5 +1,5 @@
 import { ICheckRadio } from '@src/interfaces/filters'
-import IProduct from '@src/interfaces/product'
+import IProduct, { ColorsEnum } from '@src/interfaces/product'
 import moment from 'moment'
 
 const brands: ICheckRadio[] = [
@@ -37,13 +37,7 @@ const generateProducts = (num: number) => {
       price: Math.floor(Math.random() * 1000000),
       link: '/catalog/elektronika/telefony',
       sale: Math.floor(Math.random() * 100),
-      color: colors[colorsId] as
-        | 'black'
-        | 'blue'
-        | 'green'
-        | 'yellow'
-        | 'red'
-        | 'white',
+      color: colors[colorsId] as keyof typeof ColorsEnum,
       ram: '128 Гб',
       ssd: '1 Тб',
       rating: {
@@ -51,13 +45,11 @@ const generateProducts = (num: number) => {
         count: Math.floor(Math.random() * 100),
       },
       seller: 'STLZ',
-      shipTime: 3,
+      shipTime: Math.ceil(Math.random() * 5),
       credit: 'РАССРОЧКА ОТ 0-0-6!',
       isAvailable: !!Math.round(Math.random()),
       addToFavoriteDate: +date,
       selectedColor: 'black',
-      selectedCount: 1,
-      checked: true,
       orderDate: +date,
       getDate: +date.add(3, 'day'),
       orderStatus: Math.floor(Math.random() * 5),

@@ -1,28 +1,32 @@
 import { ColorsEnum } from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SortTypeEnum from '@src/interfaces/sort'
 import sortHelpers from '@src/helpers/sortHelpers'
-import generateProducts from '@src/data/products'
+import { useAppSelector } from '@src/hooks/redux'
 import FavoriteActions from './favoriteActions/favoriteActions'
 import FavoriteCard from './favoriteCard/favoriteCard'
 
 import './favorite.scss'
 
-const productsData = generateProducts(30)
-
 const Favorite: ReactFC = () => {
-  const [products, setProducts] = useState(productsData)
-  const [filteredProducts, setfilteredProducts] = useState(productsData)
+  const { favorite } = useAppSelector((state) => state.user)
+  const [filteredProducts, setfilteredProducts] = useState(favorite)
+  const [sortType, setSortType] = useState(SortTypeEnum.addDateUp)
 
   const onSort = (type: SortTypeEnum) => {
-    const sortedProducts = sortHelpers.sortFavoriteProducts(type, products)
+    setSortType(type)
+    const sortedProducts = sortHelpers.sortFavoriteProducts(type, [...favorite])
     setfilteredProducts(sortedProducts)
   }
 
+  useEffect(() => {
+    onSort(sortType)
+  }, [favorite])
+
   const onSearch = (value: string) => {
     const reg = new RegExp(value, 'i')
-    const filtered = products.filter((product) => {
+    const filtered = favorite.filter((product) => {
       return (
         reg.test(product.name) ||
         reg.test(product.brand.label) ||
@@ -32,30 +36,13 @@ const Favorite: ReactFC = () => {
     setfilteredProducts(filtered)
   }
 
-  const deleteFromFavorite = (id: number) => {
-    const filtered = products.filter((product) => product.id !== id)
-    setProducts(filtered)
-    setfilteredProducts(filtered)
-  }
-
-  const addToCart = (id: number) => {
-    const filtered = products.filter((product) => product.id !== id)
-    setProducts(filtered)
-    setfilteredProducts(filtered)
-  }
-
   return (
     <div className='favorite'>
       <FavoriteActions onSort={onSort} onSearch={onSearch} />
       <div className='favorite__content'>
         <div className='favorite__products'>
           {filteredProducts.map((product) => (
-            <FavoriteCard
-              key={product.id}
-              product={product}
-              onDelete={deleteFromFavorite}
-              toCart={addToCart}
-            />
+            <FavoriteCard key={product.id} product={product} />
           ))}
         </div>
       </div>
