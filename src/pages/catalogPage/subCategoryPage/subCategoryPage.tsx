@@ -5,13 +5,13 @@ import ProductCard from '@src/components/productCard/productCard'
 import CustomPagination from '@src/components/pagination/pagination'
 import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
 import SortTypeEnum from '@src/interfaces/sort'
-import sortHelpers from '@src/helpers/sortHelpers'
 import {
   changeSortType,
   changeViewType,
 } from '@src/store/productsStore/productsStore'
 
 import './subCategoryPage.scss'
+import sortHelpers from '@src/helpers/sortHelpers'
 
 const SubCategoryPage: ReactFC = () => {
   const dispatch = useAppDispatch()
