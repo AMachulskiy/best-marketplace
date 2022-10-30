@@ -22,4 +22,8 @@
       border-color: $color-text-light;
     }
   }
+  &.disable {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }
