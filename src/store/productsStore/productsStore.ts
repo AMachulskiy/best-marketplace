@@ -14,6 +14,7 @@ const filters = filterHelpers.getFilters(products)
 interface IProductsState {
   filters: IProductsFilters
   selectedFilters: IProductsSelectedFilters
+  product: IProduct
   products: IProduct[]
   partFilteredProducts: IProduct[]
   filteredProducts: IProduct[]
@@ -29,6 +30,7 @@ const initialState: IProductsState = {
     sale: null,
     brands: [],
   },
+  product: null,
   products,
   partFilteredProducts: products,
   filteredProducts: products,
@@ -59,9 +61,15 @@ const productsStore = createSlice({
     changeViewType: (state, action: PayloadAction<'small' | 'big'>) => {
       state.viewType = action.payload
     },
+    setProduct: (state, action: PayloadAction<number>) => {
+      const productData = state.products.find(
+        (product) => product.id === action.payload
+      )
+      state.product = productData
+    },
   },
 })
 
 export default productsStore
-export const { setFilters, changeSortType, changeViewType } =
+export const { setFilters, changeSortType, changeViewType, setProduct } =
   productsStore.actions
