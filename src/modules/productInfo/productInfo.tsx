@@ -1,13 +1,13 @@
 import IProduct, { IInformationList } from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
 import React, { useState } from 'react'
+import functionHelpers from '@src/helpers/functionHelpers'
 import InformationList from './informationList/informationList'
 import ProductSlider from './productSlider/productSlider'
 import ProductActions from './productActions/productActions'
 import FixedPanel from './fixedPanel/fixedPanel'
 
 import './productInfo.scss'
-import functionHelpers from '@src/helpers/functionHelpers'
 
 const dataProductInformation: IInformationList[] = [
   {
