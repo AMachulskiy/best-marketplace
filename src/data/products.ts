@@ -37,7 +37,7 @@ const generateProducts = (num: number) => {
     const colorsId = functionHelpers.getRandomNumber(colors.length)
     const date = moment(Date.now() - functionHelpers.getRandomMilliseconds(10))
     const ratingTotalId = functionHelpers.getRandomNumber(ratingStars.length)
-    const imagesCount = functionHelpers.getRandomNumberInRange(5, 10)
+    const imagesCount = functionHelpers.getRandomNumberInRange(1, 10)
     const images = generateImages(imagesCount)
     const productData: IProduct = {
       id: i,
