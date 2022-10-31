@@ -5,27 +5,23 @@ import { useSwiper } from 'swiper/react'
 import './productSlider.scss'
 
 interface IPreviewSliderProps {
-  slide: number
+  slideNum: number
+  img: string
   changeActiveSlide: (slideId: number) => void
 }
 
 const PreviewSlide: ReactFC<IPreviewSliderProps> = ({
-  slide,
+  slideNum,
+  img,
   changeActiveSlide,
 }) => {
   const swiper = useSwiper()
 
   const changeSlide = () => {
-    swiper.slideTo(slide)
-    changeActiveSlide(slide - 1)
+    swiper.slideTo(slideNum)
+    changeActiveSlide(slideNum - 1)
   }
-  return (
-    <img
-      onMouseEnter={changeSlide}
-      src={`https://placeimg.com/1920/1080/tech?id=${slide}`}
-      alt='Main page slide'
-    />
-  )
+  return <img onMouseEnter={changeSlide} src={img} alt='Main page slide' />
 }
 
 export default PreviewSlide
