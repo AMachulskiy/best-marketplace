@@ -8,11 +8,11 @@ import ICategoriesParams from '@src/interfaces/params'
 import { ReactFC } from '@src/interfaces/react'
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-
-import './productPage.scss'
 import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
 import { setProduct } from '@src/store/productsStore/productsStore'
 import { ColorsEnum } from '@src/interfaces/product'
+
+import './productPage.scss'
 
 const ProductPage: ReactFC = () => {
   const { id } = useParams()
@@ -54,7 +54,7 @@ const ProductPage: ReactFC = () => {
         </div>
         <span>Купили {product.soldCount} раз</span>
       </div>
-      <ProductInfo product={product} />
+      <ProductInfo />
     </div>
   )
 }
