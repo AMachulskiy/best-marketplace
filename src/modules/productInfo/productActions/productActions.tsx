@@ -60,7 +60,10 @@ const ProductActions: ReactFC = () => {
         <span>В кредит от</span>
         <strong>{functionHelpers.getDigitNumber(19499)} ₽</strong>
       </div>
-      <Button onClick={() => dispatch(addToBasket(product))}>
+      <Button
+        onClick={() => dispatch(addToBasket(product))}
+        disable={haveProductInBasket}
+      >
         {haveProductInBasket ? 'Добавлено в корзину' : 'Добавить в корзину'}
       </Button>
       <Button theme='outline' onClick={buyNow}>
