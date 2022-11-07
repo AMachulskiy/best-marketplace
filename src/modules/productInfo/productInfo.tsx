@@ -1,15 +1,14 @@
-import IProduct, { IInformationList } from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
 import React, { useState } from 'react'
+import functionHelpers from '@src/helpers/functionHelpers'
 import InformationList from './informationList/informationList'
 import ProductSlider from './productSlider/productSlider'
 import ProductActions from './productActions/productActions'
 import FixedPanel from './fixedPanel/fixedPanel'
 
 import './productInfo.scss'
-import functionHelpers from '@src/helpers/functionHelpers'
 
-const dataProductInformation: IInformationList[] = [
+const dataProductInformation = [
   {
     title: 'Общие характеристики',
     list: [
@@ -58,11 +57,7 @@ const dataProductInformation: IInformationList[] = [
   },
 ]
 
-interface IProductInfoProps {
-  product: IProduct
-}
-
-const ProductInfo: ReactFC<IProductInfoProps> = ({ product }) => {
+const ProductInfo: ReactFC = () => {
   const [isOpenCharacteristics, setIsOpenCharacteristics] = useState(false)
   const [isOpenDesc, setIsOpenDesc] = useState(false)
 
@@ -135,7 +130,7 @@ const ProductInfo: ReactFC<IProductInfoProps> = ({ product }) => {
         <div>
           Продавец <strong>STLZ</strong>
         </div>
-        <FixedPanel product={product} />
+        <FixedPanel />
       </div>
     </div>
   )

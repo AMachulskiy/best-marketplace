@@ -61,6 +61,7 @@ interface IProduct {
   soldCount: number
   updated: number
   isRefund?: boolean
+  images: string[]
 }
 
 export default IProduct

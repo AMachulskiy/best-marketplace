@@ -1,6 +1,5 @@
 import IProduct from '@src/interfaces/product'
 import SortTypeEnum from '@src/interfaces/sort'
-import functionHelpers from './functionHelpers'
 import priceHelpers from './priceHelpers'
 
 const sortHelpers = {

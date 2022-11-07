@@ -2,18 +2,23 @@ import { ReactFC } from '@src/interfaces/react'
 import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Navigation, Pagination, Thumbs } from 'swiper'
+import { useAppSelector } from '@src/hooks/redux'
 import PreviewSlide from './previewSlide'
+import Slide from './slide'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 import './productSlider.scss'
-import Slide from './slide'
 
 const ProductSlider: ReactFC = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
   const [activeSlide, setActiveSlide] = useState(0)
+  const {
+    product: { images },
+  } = useAppSelector((state) => state.products)
+
   const renderPreviewsSlider = () => (
     <div className='previews'>
       <div className='previews-prev'>
@@ -31,9 +36,13 @@ const ProductSlider: ReactFC = () => {
         modules={[Autoplay, Pagination, Navigation, Thumbs]}
         className='product-slider previews-slider'
       >
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (
+        {images.map((item, idx) => (
           <SwiperSlide key={item}>
-            <PreviewSlide slide={item} changeActiveSlide={setActiveSlide} />
+            <PreviewSlide
+              img={item}
+              slideNum={idx}
+              changeActiveSlide={setActiveSlide}
+            />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -50,10 +59,10 @@ const ProductSlider: ReactFC = () => {
       modules={[Autoplay, Pagination, Navigation, Thumbs]}
       className='product-slider'
     >
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (
+      {images.map((item) => (
         <SwiperSlide key={item}>
           <Slide
-            slide={item}
+            img={item}
             activeSlide={activeSlide}
             className='product-slider__zoomimg'
           />

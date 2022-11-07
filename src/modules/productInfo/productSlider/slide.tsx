@@ -6,13 +6,13 @@ import ContentZoom from 'react-content-zoom'
 import './productSlider.scss'
 
 interface IPreviewSliderProps {
-  slide: number
+  img: string
   activeSlide: number
   className?: string
 }
 
 const Slide: ReactFC<IPreviewSliderProps> = ({
-  slide,
+  img,
   activeSlide,
   className,
 }) => {
@@ -24,11 +24,7 @@ const Slide: ReactFC<IPreviewSliderProps> = ({
 
   return (
     <div className={className}>
-      <ContentZoom
-        zoomPercent={350}
-        largeImageUrl={`https://placeimg.com/1920/1080/tech?id=${slide}`}
-        imageUrl={`https://placeimg.com/1920/1080/tech?id=${slide}`}
-      />
+      <ContentZoom zoomPercent={350} largeImageUrl={img} imageUrl={img} />
     </div>
   )
 }
