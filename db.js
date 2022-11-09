@@ -1,24 +1,30 @@
+const generateProducts = require('./src/server/data/products')
+
 module.exports = () => {
   const data = {
-    projects: [],
+    products: [],
+    users: [
+      {
+        name: 'Алексей',
+        lastname: 'Мачульский',
+        phone: '+7 888 888-88-88',
+        isNotification: false,
+        shipping: {
+          type: 'courier',
+          address: null,
+          addresses: [
+            'Москва, Красная площадь, д. 1',
+            'Санкт-Петербург, ул. Петра 1, д. 8',
+          ],
+        },
+        paymentType: null,
+        basket: [],
+        favorite: [],
+        bayed: [],
+      },
+    ],
   }
-
-  data.projects.push(
-    {
-      id: 1,
-      title: '_landing page',
-      commits: 138,
-      desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      button: 'Check in GitHub',
-    },
-    {
-      id: 2,
-      title: '_portfolio',
-      commits: 245,
-      desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      button: 'Check in GitHub',
-    }
-  )
+  data.products = generateProducts(15)
 
   return data
 }
