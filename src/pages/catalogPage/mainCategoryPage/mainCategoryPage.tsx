@@ -1,14 +1,26 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import { ReactFC } from '@src/interfaces/react'
 import MainPageSlider from '@src/components/mainPageSlider/mainPageSlider'
 import CollectionCard from '@src/components/collectionCard/collectionCard'
 import MiniProductCard from '@src/components/miniProductCard/miniProductCard'
-import IProduct from '@src/interfaces/product'
-import generateProducts from '@src/data/products'
 
 import './mainCategoryPage.scss'
+import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
+import Preloader from '@src/components/preloader/preloader'
+import getProducts from '@src/store/productsStore/actions'
 
 const MainCategoryPage: ReactFC = () => {
+  const dispatch = useAppDispatch()
+  const { products, isLoading, haveData } = useAppSelector(
+    (state) => state.products
+  )
+
+  useEffect(() => {
+    if (!haveData) {
+      dispatch(getProducts())
+    }
+  }, [haveData])
+
   const renderCollection = (num: number) => {
     const collections: ReactNode[] = []
     for (let i = 0; i < num; i++) {
@@ -18,15 +30,16 @@ const MainCategoryPage: ReactFC = () => {
   }
 
   const renderProducts = (num: number) => {
-    const productsData = generateProducts(num)
-    const products: ReactNode[] = []
-    productsData.forEach((productData: IProduct) => {
-      products.push(
-        <MiniProductCard key={productData.id} product={productData} />
+    const cutProducts: ReactNode[] = []
+    for (let i = 0; i < num; i++) {
+      cutProducts.push(
+        <MiniProductCard key={products[i].id} product={products[i]} />
       )
-    })
-    return products
+    }
+    return cutProducts
   }
+
+  if (isLoading || !haveData) return <Preloader />
 
   return (
     <>
