@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ReactFC } from '@src/interfaces/react'
 import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
 import { ICheckRadio, IColor, IRange } from '@src/interfaces/filters'
 import { setFilters } from '@src/store/productsStore/productsStore'
+import getProducts from '@src/store/productsStore/actions'
 import FilterCheckbox from '../filterCheckbox/filterCheckbox'
 import FilterColor from '../filterColor/filterColor'
 import FilterRadio from '../filterRadio/filterRadio'
 import FilterRange from '../filterRange/filterRange'
 
 import './filters.scss'
+import Preloader from '../preloader/preloader'
 
 const saleData: ICheckRadio[] = [
   { id: 1, label: 'от 10% и выше', value: 10 },
@@ -19,7 +21,14 @@ const saleData: ICheckRadio[] = [
 
 const Filters: ReactFC = () => {
   const dispatch = useAppDispatch()
-  const { filters, selectedFilters } = useAppSelector((state) => state.products)
+  const { filters, selectedFilters, isLoading, isError, error, haveData } =
+    useAppSelector((state) => state.products)
+
+  useEffect(() => {
+    if (!haveData) {
+      dispatch(getProducts())
+    }
+  }, [haveData])
 
   const changeColor = (color: IColor) => {
     const { colors } = selectedFilters
@@ -71,6 +80,8 @@ const Filters: ReactFC = () => {
       })
     )
   }
+
+  if (isLoading || !haveData) return <Preloader />
 
   return (
     <div className='filters'>
