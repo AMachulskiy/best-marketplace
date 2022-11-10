@@ -4,6 +4,7 @@ import IProduct from '@src/interfaces/product'
 import ShippingTypeEnum from '@src/interfaces/shipping'
 import IUser from '@src/interfaces/user'
 import {
+  addToBasket,
   addToFavorite,
   deleteFromFavorite,
   getUser,
@@ -70,25 +71,6 @@ const userStore = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    addToBasket: (state, action: PayloadAction<IProduct>) => {
-      const haveProductInBasket = state.basket.some(
-        (product) => product.id === action.payload.id
-      )
-      if (haveProductInBasket) {
-        state.basket = state.basket.map((product) => {
-          if (product.id === action.payload.id) {
-            product.selectedCount++
-          }
-          return product
-        })
-      } else {
-        state.basket.push({
-          ...action.payload,
-          selectedCount: 1,
-          inOrder: true,
-        })
-      }
-    },
     changeSelectedProductCount: (
       state,
       action: PayloadAction<{ id: number; count: number }>
@@ -195,12 +177,17 @@ const userStore = createSlice({
         state.favorite = user.favorite
       }
     },
+    [addToBasket.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
+      const user = action.payload
+      if (user) {
+        state.basket = user.basket
+      }
+    },
   },
 })
 
 export default userStore
 export const {
-  addToBasket,
   changeSelectedProductCount,
   changeProductInOrderStatus,
   changeAllInOrderStatus,

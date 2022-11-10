@@ -67,3 +67,31 @@ export const deleteFromFavorite = createAsyncThunk(
     return response
   }
 )
+
+export const addToBasket = createAsyncThunk(
+  'addToBasket',
+  (product: IProduct, thunkApi) => {
+    const state = thunkApi.getState() as AppState
+    let newBasket: IProduct[] = []
+    const haveProductInBasket = state.user.basket.some(
+      (prod) => prod.id === product.id
+    )
+    if (haveProductInBasket) {
+      newBasket = state.user.basket.map((prod) => {
+        if (prod.id === product.id) {
+          prod = { ...prod, selectedCount: prod.selectedCount + 1 }
+        }
+        return prod
+      })
+    } else {
+      newBasket = [...state.user.basket]
+      newBasket.push({
+        ...product,
+        selectedCount: 1,
+        inOrder: true,
+      })
+    }
+    const response = usersService.updateBasket(state.user.id, newBasket)
+    return response
+  }
+)
