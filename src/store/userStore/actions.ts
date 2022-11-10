@@ -26,3 +26,15 @@ export const hideProductFromBayed = createAsyncThunk(
     return response
   }
 )
+
+export const toRefund = createAsyncThunk('toRefund', (id: number, thunkApi) => {
+  const state = thunkApi.getState() as AppState
+  const newBayed = state.user.bayed.map((product) => {
+    if (product.id === id) {
+      product = { ...product, isRefund: true }
+    }
+    return product
+  })
+  const response = usersService.toRefund(state.user.id, newBayed)
+  return response
+})

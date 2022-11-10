@@ -3,7 +3,12 @@ import { PaymentType } from '@src/interfaces/payment'
 import IProduct from '@src/interfaces/product'
 import ShippingTypeEnum from '@src/interfaces/shipping'
 import IUser from '@src/interfaces/user'
-import { getUser, hideProductFromBayed, setNotificationStatus } from './actions'
+import {
+  getUser,
+  hideProductFromBayed,
+  setNotificationStatus,
+  toRefund,
+} from './actions'
 
 interface IUserState {
   id: number
@@ -63,14 +68,6 @@ const userStore = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    toRefund: (state, action: PayloadAction<number>) => {
-      state.bayed = state.bayed.map((product) => {
-        if (product.id === action.payload) {
-          product.isRefund = true
-        }
-        return product
-      })
-    },
     addToFavorite: (state, action: PayloadAction<IProduct>) => {
       const haveProductInFavorite = state.favorite.some(
         (product) => product.id === action.payload.id
@@ -190,12 +187,15 @@ const userStore = createSlice({
       const user = action.payload
       state.bayed = user.bayed
     },
+    [toRefund.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
+      const user = action.payload
+      state.bayed = user.bayed
+    },
   },
 })
 
 export default userStore
 export const {
-  toRefund,
   addToFavorite,
   deleteFromFavorite,
   addToBasket,
