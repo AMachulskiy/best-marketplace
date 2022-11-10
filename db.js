@@ -5,9 +5,12 @@ module.exports = () => {
     products: [],
     users: [
       {
-        name: 'Алексей',
-        lastname: 'Мачульский',
-        phone: '+7 888 888-88-88',
+        id: 1,
+        data: {
+          name: 'Алексей',
+          lastname: 'Мачульский',
+          phone: '+7 888 888-88-88',
+        },
         isNotification: false,
         shipping: {
           type: 'courier',
