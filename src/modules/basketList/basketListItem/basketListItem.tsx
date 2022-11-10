@@ -4,10 +4,12 @@ import priceHelpers from '@src/helpers/priceHelpers'
 import { useAppDispatch } from '@src/hooks/redux'
 import IProduct, { ColorsEnum } from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
-import { addToFavorite } from '@src/store/userStore/actions'
+import {
+  addToFavorite,
+  changeSelectedProductCount,
+} from '@src/store/userStore/actions'
 import {
   changeProductInOrderStatus,
-  changeSelectedProductCount,
   deleteFromBasket,
 } from '@src/store/userStore/userStore'
 import React from 'react'

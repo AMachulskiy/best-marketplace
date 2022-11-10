@@ -95,3 +95,22 @@ export const addToBasket = createAsyncThunk(
     return response
   }
 )
+
+export const changeSelectedProductCount = createAsyncThunk(
+  'changeSelectedProductCount',
+  (data: { id: number; count: number }, thunkApi) => {
+    const state = thunkApi.getState() as AppState
+    const newBasket = state.user.basket.map((product) => {
+      if (product.id === data.id) {
+        product = {
+          ...product,
+          selectedCount: data.count,
+        }
+        product.selectedCount = data.count
+      }
+      return product
+    })
+    const response = usersService.updateBasket(state.user.id, newBasket)
+    return response
+  }
+)

@@ -6,6 +6,7 @@ import IUser from '@src/interfaces/user'
 import {
   addToBasket,
   addToFavorite,
+  changeSelectedProductCount,
   deleteFromFavorite,
   getUser,
   hideProductFromBayed,
@@ -71,17 +72,6 @@ const userStore = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    changeSelectedProductCount: (
-      state,
-      action: PayloadAction<{ id: number; count: number }>
-    ) => {
-      state.basket = state.basket.map((product) => {
-        if (product.id === action.payload.id) {
-          product.selectedCount = action.payload.count
-        }
-        return product
-      })
-    },
     changeProductInOrderStatus: (state, action: PayloadAction<number>) => {
       state.basket = state.basket.map((product) => {
         if (product.id === action.payload) {
@@ -179,16 +169,20 @@ const userStore = createSlice({
     },
     [addToBasket.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
       const user = action.payload
-      if (user) {
-        state.basket = user.basket
-      }
+      state.basket = user.basket
+    },
+    [changeSelectedProductCount.fulfilled.type]: (
+      state,
+      action: PayloadAction<IUser>
+    ) => {
+      const user = action.payload
+      state.basket = user.basket
     },
   },
 })
 
 export default userStore
 export const {
-  changeSelectedProductCount,
   changeProductInOrderStatus,
   changeAllInOrderStatus,
   deleteFromBasket,
