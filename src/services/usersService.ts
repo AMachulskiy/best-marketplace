@@ -22,20 +22,12 @@ export default class UsersService implements IUsersService {
     return data
   }
 
-  hideProductFromBayed = async (
-    userID: number,
-    bayed: IProduct[]
-  ): Promise<IUser> => {
+  updateBayed = async (userID: number, bayed: IProduct[]): Promise<IUser> => {
     const { data } = await this.api.patch(`users/${userID}`, { bayed })
     return data
   }
 
-  toRefund = async (userID: number, bayed: IProduct[]): Promise<IUser> => {
-    const { data } = await this.api.patch(`users/${userID}`, { bayed })
-    return data
-  }
-
-  addToFavorite = async (
+  updateFavorite = async (
     userID: number,
     favorite: IProduct[]
   ): Promise<IUser> => {

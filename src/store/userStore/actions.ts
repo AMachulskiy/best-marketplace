@@ -23,7 +23,7 @@ export const hideProductFromBayed = createAsyncThunk(
   (id: number, thunkApi) => {
     const state = thunkApi.getState() as AppState
     const newBayed = state.user.bayed.filter((product) => product.id !== id)
-    const response = usersService.hideProductFromBayed(state.user.id, newBayed)
+    const response = usersService.updateBayed(state.user.id, newBayed)
     return response
   }
 )
@@ -36,7 +36,7 @@ export const toRefund = createAsyncThunk('toRefund', (id: number, thunkApi) => {
     }
     return product
   })
-  const response = usersService.toRefund(state.user.id, newBayed)
+  const response = usersService.updateBayed(state.user.id, newBayed)
   return response
 })
 
@@ -49,9 +49,21 @@ export const addToFavorite = createAsyncThunk(
     )
     if (!haveProductInFavorite) {
       const newFavorite = [...state.user.favorite, product]
-      const response = usersService.addToFavorite(state.user.id, newFavorite)
+      const response = usersService.updateFavorite(state.user.id, newFavorite)
       return response
     }
     return null
+  }
+)
+
+export const deleteFromFavorite = createAsyncThunk(
+  'deleteFromFavorite',
+  (id: number, thunkApi) => {
+    const state = thunkApi.getState() as AppState
+    const newFavorite = state.user.favorite.filter(
+      (product) => product.id !== id
+    )
+    const response = usersService.updateFavorite(state.user.id, newFavorite)
+    return response
   }
 )
