@@ -4,6 +4,7 @@ import IProduct from '@src/interfaces/product'
 import ShippingTypeEnum from '@src/interfaces/shipping'
 import IUser from '@src/interfaces/user'
 import {
+  addToFavorite,
   getUser,
   hideProductFromBayed,
   setNotificationStatus,
@@ -68,14 +69,6 @@ const userStore = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    addToFavorite: (state, action: PayloadAction<IProduct>) => {
-      const haveProductInFavorite = state.favorite.some(
-        (product) => product.id === action.payload.id
-      )
-      if (!haveProductInFavorite) {
-        state.favorite.push(action.payload)
-      }
-    },
     deleteFromFavorite: (state, action: PayloadAction<number>) => {
       state.favorite = state.favorite.filter(
         (product) => product.id !== action.payload
@@ -191,12 +184,17 @@ const userStore = createSlice({
       const user = action.payload
       state.bayed = user.bayed
     },
+    [addToFavorite.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
+      const user = action.payload
+      if (user) {
+        state.favorite = user.favorite
+      }
+    },
   },
 })
 
 export default userStore
 export const {
-  addToFavorite,
   deleteFromFavorite,
   addToBasket,
   changeSelectedProductCount,

@@ -34,4 +34,12 @@ export default class UsersService implements IUsersService {
     const { data } = await this.api.patch(`users/${userID}`, { bayed })
     return data
   }
+
+  addToFavorite = async (
+    userID: number,
+    favorite: IProduct[]
+  ): Promise<IUser> => {
+    const { data } = await this.api.patch(`users/${userID}`, { favorite })
+    return data
+  }
 }

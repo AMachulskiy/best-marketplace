@@ -6,11 +6,8 @@ import productHelpers from '@src/helpers/productHelpers'
 import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
 import { ReactFC } from '@src/interfaces/react'
 import routing from '@src/routes/routes'
-import {
-  addToBasket,
-  addToFavorite,
-  deleteFromFavorite,
-} from '@src/store/userStore/userStore'
+import { addToFavorite } from '@src/store/userStore/actions'
+import { addToBasket, deleteFromFavorite } from '@src/store/userStore/userStore'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 

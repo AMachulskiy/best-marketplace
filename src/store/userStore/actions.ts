@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import IProduct from '@src/interfaces/product'
 import UsersService from '@src/services/usersService'
 import { AppState } from '../store'
 
@@ -38,3 +39,19 @@ export const toRefund = createAsyncThunk('toRefund', (id: number, thunkApi) => {
   const response = usersService.toRefund(state.user.id, newBayed)
   return response
 })
+
+export const addToFavorite = createAsyncThunk(
+  'addToFavorite',
+  (product: IProduct, thunkApi) => {
+    const state = thunkApi.getState() as AppState
+    const haveProductInFavorite = state.user.favorite.some(
+      (prod) => prod.id === product.id
+    )
+    if (!haveProductInFavorite) {
+      const newFavorite = [...state.user.favorite, product]
+      const response = usersService.addToFavorite(state.user.id, newFavorite)
+      return response
+    }
+    return null
+  }
+)

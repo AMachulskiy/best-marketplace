@@ -4,17 +4,14 @@ import priceHelpers from '@src/helpers/priceHelpers'
 import productHelpers from '@src/helpers/productHelpers'
 import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
 import { ReactFC } from '@src/interfaces/react'
-import {
-  addToBasket,
-  addToFavorite,
-  deleteFromFavorite,
-} from '@src/store/userStore/userStore'
+import { addToBasket, deleteFromFavorite } from '@src/store/userStore/userStore'
 import routing from '@src/routes/routes'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 
 import './productActions.scss'
+import { addToFavorite } from '@src/store/userStore/actions'
 
 const ProductActions: ReactFC = () => {
   const dispatch = useAppDispatch()
