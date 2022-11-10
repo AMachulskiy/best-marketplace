@@ -2,8 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { PaymentType } from '@src/interfaces/payment'
 import IProduct from '@src/interfaces/product'
 import ShippingTypeEnum from '@src/interfaces/shipping'
+import IUser from '@src/interfaces/user'
+import { getUser, hideProductFromBayed, setNotificationStatus } from './actions'
 
 interface IUserState {
+  id: number
   data: {
     name: string
     lastname: string
@@ -23,22 +26,24 @@ interface IUserState {
     address: boolean
     payment: boolean
   }
+  isLoading: boolean
+  isError: boolean
+  error: string
+  haveData: boolean
 }
 
 const initialState: IUserState = {
+  id: null,
   data: {
-    name: 'Алексей',
-    lastname: 'Мачульский',
-    phone: '+7 888 888-88-88',
+    name: null,
+    lastname: null,
+    phone: null,
   },
   isNotification: false,
   shipping: {
-    type: ShippingTypeEnum.courier,
+    type: null,
     address: null,
-    addresses: [
-      'Москва, Красная площадь, д. 1',
-      'Санкт-Петербург, ул. Петра 1, д. 8',
-    ],
+    addresses: [],
   },
   paymentType: null,
   basket: [],
@@ -48,20 +53,16 @@ const initialState: IUserState = {
     address: false,
     payment: false,
   },
+  isLoading: false,
+  isError: false,
+  error: '',
+  haveData: false,
 }
 
 const userStore = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    changeNotificationStatus: (state) => {
-      state.isNotification = !state.isNotification
-    },
-    hideProductFromBayed: (state, action: PayloadAction<number>) => {
-      state.bayed = state.bayed.filter(
-        (product) => product.id !== action.payload
-      )
-    },
     toRefund: (state, action: PayloadAction<number>) => {
       state.bayed = state.bayed.map((product) => {
         if (product.id === action.payload) {
@@ -153,12 +154,47 @@ const userStore = createSlice({
       state.bayed = [...state.bayed, ...bayedProducts]
     },
   },
+  extraReducers: {
+    [getUser.pending.type]: (state) => {
+      state.isLoading = true
+    },
+    [getUser.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
+      const user = action.payload
+      state.isLoading = false
+      state.haveData = true
+      state.id = user.id
+      state.data = user.data
+      state.isNotification = user.isNotification
+      state.shipping = user.shipping
+      state.paymentType = user.paymentType
+      state.basket = user.basket
+      state.favorite = user.favorite
+      state.bayed = user.bayed
+    },
+    [getUser.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.isError = true
+      state.error = action.payload
+    },
+    [setNotificationStatus.fulfilled.type]: (
+      state,
+      action: PayloadAction<IUser>
+    ) => {
+      const user = action.payload
+      state.isNotification = user.isNotification
+    },
+    [hideProductFromBayed.fulfilled.type]: (
+      state,
+      action: PayloadAction<IUser>
+    ) => {
+      const user = action.payload
+      state.bayed = user.bayed
+    },
+  },
 })
 
 export default userStore
 export const {
-  changeNotificationStatus,
-  hideProductFromBayed,
   toRefund,
   addToFavorite,
   deleteFromFavorite,
