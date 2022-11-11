@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react'
+import React, { ReactNode } from 'react'
 import { ReactFC } from '@src/interfaces/react'
 import IProduct from '@src/interfaces/product'
 import ProductCard from '@src/components/productCard/productCard'
@@ -6,7 +6,6 @@ import CustomPagination from '@src/components/pagination/pagination'
 import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
 import SortTypeEnum from '@src/interfaces/sort'
 import sortHelpers from '@src/helpers/sortHelpers'
-import getProducts from '@src/store/productsStore/actions'
 import {
   changeSortType,
   changeViewType,
@@ -17,21 +16,8 @@ import Preloader from '@src/components/preloader/preloader'
 
 const SubCategoryPage: ReactFC = () => {
   const dispatch = useAppDispatch()
-  const {
-    filteredProducts,
-    sortType,
-    viewType,
-    isLoading,
-    isError,
-    error,
-    haveData,
-  } = useAppSelector((state) => state.products)
-
-  useEffect(() => {
-    if (!haveData) {
-      dispatch(getProducts())
-    }
-  }, [haveData])
+  const { filteredProducts, sortType, viewType, isLoading, haveData } =
+    useAppSelector((state) => state.products)
 
   const isPriceSortType =
     sortType === SortTypeEnum.priceUp || sortType === SortTypeEnum.priceDown

@@ -1,8 +1,8 @@
 import { ReactFC } from '@src/interfaces/react'
 import routing from '@src/routes/routes'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
-import { getUser, setNotificationStatus } from '@src/store/userStore/actions'
+import { setNotificationStatus } from '@src/store/userStore/actions'
 import Preloader from '@src/components/preloader/preloader'
 import AccountCard from './accountCard/accountCard'
 
@@ -19,12 +19,6 @@ const Account: ReactFC = () => {
     isLoading,
     haveData,
   } = useAppSelector((state) => state.user)
-
-  useEffect(() => {
-    if (!haveData) {
-      dispatch(getUser(1))
-    }
-  }, [haveData])
 
   if (isLoading || !haveData) return <Preloader />
 

@@ -1,9 +1,11 @@
 import Search from '@src/components/search/search'
-import { useAppDispatch } from '@src/hooks/redux'
+import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
 import { ReactFC } from '@src/interfaces/react'
 import routing from '@src/routes/routes'
 import menuSlice from '@src/store/menu/menuSlice'
-import React from 'react'
+import getProducts from '@src/store/productsStore/actions'
+import { getUser } from '@src/store/userStore/actions'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import './header.scss'
@@ -11,6 +13,17 @@ import './header.scss'
 const Header: ReactFC = () => {
   const dispatch = useAppDispatch()
   const { setIsOpen } = menuSlice.actions
+  const { user, products } = useAppSelector((state) => state)
+
+  useEffect(() => {
+    if (!user.haveData) {
+      dispatch(getUser(1))
+    }
+    if (!products.haveData) {
+      dispatch(getProducts())
+    }
+  }, [user.haveData, products.haveData])
+
   const openMenu = () => {
     dispatch(setIsOpen(true))
   }

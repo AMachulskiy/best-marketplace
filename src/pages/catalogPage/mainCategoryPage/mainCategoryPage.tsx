@@ -1,25 +1,17 @@
-import React, { ReactNode, useEffect } from 'react'
+import React, { ReactNode } from 'react'
 import { ReactFC } from '@src/interfaces/react'
 import MainPageSlider from '@src/components/mainPageSlider/mainPageSlider'
 import CollectionCard from '@src/components/collectionCard/collectionCard'
 import MiniProductCard from '@src/components/miniProductCard/miniProductCard'
 
 import './mainCategoryPage.scss'
-import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
+import { useAppSelector } from '@src/hooks/redux'
 import Preloader from '@src/components/preloader/preloader'
-import getProducts from '@src/store/productsStore/actions'
 
 const MainCategoryPage: ReactFC = () => {
-  const dispatch = useAppDispatch()
   const { products, isLoading, haveData } = useAppSelector(
     (state) => state.products
   )
-
-  useEffect(() => {
-    if (!haveData) {
-      dispatch(getProducts())
-    }
-  }, [haveData])
 
   const renderCollection = (num: number) => {
     const collections: ReactNode[] = []
