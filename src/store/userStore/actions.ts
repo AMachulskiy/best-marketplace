@@ -135,3 +135,13 @@ export const changeShippingType = createAsyncThunk(
     return response
   }
 )
+
+export const setShippingAddress = createAsyncThunk(
+  'setShippingAddress',
+  (address: string, thunkApi) => {
+    const state = thunkApi.getState() as AppState
+    const shipping = { ...state.user.shipping, address }
+    const response = usersService.changeShippingData(state.user.id, shipping)
+    return response
+  }
+)

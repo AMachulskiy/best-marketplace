@@ -13,6 +13,7 @@ import {
   getUser,
   hideProductFromBayed,
   setNotificationStatus,
+  setShippingAddress,
   toRefund,
 } from './actions'
 
@@ -83,10 +84,6 @@ const userStore = createSlice({
         product.inOrder = action.payload
         return product
       })
-    },
-    setShippingAddress: (state, action: PayloadAction<string>) => {
-      state.shipping.address = action.payload
-      state.warnings.address = false
     },
     changePaymentType: (state, action: PayloadAction<PaymentType>) => {
       state.paymentType = action.payload
@@ -182,6 +179,14 @@ const userStore = createSlice({
       const user = action.payload
       state.shipping.type = user.shipping.type
     },
+    [setShippingAddress.fulfilled.type]: (
+      state,
+      action: PayloadAction<IUser>
+    ) => {
+      const user = action.payload
+      state.shipping.address = user.shipping.address
+      state.warnings.address = false
+    },
   },
 })
 
@@ -189,7 +194,6 @@ export default userStore
 export const {
   changeProductInOrderStatus,
   changeAllInOrderStatus,
-  setShippingAddress,
   changePaymentType,
   checkWarnings,
   completeOrder,
