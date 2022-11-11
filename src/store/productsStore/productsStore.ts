@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import generateProducts from '@src/data/products'
 import filterHelpers from '@src/helpers/filterHelpers'
 import {
   IProductsFilters,
@@ -8,9 +7,6 @@ import {
 import IProduct from '@src/interfaces/product'
 import SortTypeEnum from '@src/interfaces/sort'
 import getProducts from './actions'
-
-// const products = generateProducts(50)
-// const filters = filterHelpers.getFilters(products)
 
 interface IProductsState {
   filters: IProductsFilters
