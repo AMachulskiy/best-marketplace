@@ -1,3 +1,4 @@
+import { PaymentType } from '@src/interfaces/payment'
 import IProduct from '@src/interfaces/product'
 import ShippingTypeEnum, { IShipping } from '@src/interfaces/shipping'
 import IUser from '@src/interfaces/user'
@@ -46,6 +47,14 @@ export default class UsersService implements IUsersService {
     shipping: IShipping
   ): Promise<IUser> => {
     const { data } = await this.api.patch(`users/${userID}`, { shipping })
+    return data
+  }
+
+  changePaymentType = async (
+    userID: number,
+    paymentType: PaymentType
+  ): Promise<IUser> => {
+    const { data } = await this.api.patch(`users/${userID}`, { paymentType })
     return data
   }
 }

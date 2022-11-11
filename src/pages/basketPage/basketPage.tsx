@@ -11,10 +11,10 @@ import ShippingTypeEnum, {
   ShippingTypeValueEnum,
 } from '@src/interfaces/shipping'
 import {
+  changePaymentType,
   changeShippingType,
   setShippingAddress,
 } from '@src/store/userStore/actions'
-import { changePaymentType } from '@src/store/userStore/userStore'
 
 import './basketPage.scss'
 

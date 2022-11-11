@@ -6,6 +6,7 @@ import IUser from '@src/interfaces/user'
 import {
   addToBasket,
   addToFavorite,
+  changePaymentType,
   changeSelectedProductCount,
   changeShippingType,
   deleteFromBasket,
@@ -84,10 +85,6 @@ const userStore = createSlice({
         product.inOrder = action.payload
         return product
       })
-    },
-    changePaymentType: (state, action: PayloadAction<PaymentType>) => {
-      state.paymentType = action.payload
-      state.warnings.payment = false
     },
     checkWarnings: (state) => {
       state.warnings.address = !state.shipping.address
@@ -187,6 +184,14 @@ const userStore = createSlice({
       state.shipping.address = user.shipping.address
       state.warnings.address = false
     },
+    [changePaymentType.fulfilled.type]: (
+      state,
+      action: PayloadAction<IUser>
+    ) => {
+      const user = action.payload
+      state.paymentType = user.paymentType
+      state.warnings.payment = false
+    },
   },
 })
 
@@ -194,7 +199,6 @@ export default userStore
 export const {
   changeProductInOrderStatus,
   changeAllInOrderStatus,
-  changePaymentType,
   checkWarnings,
   completeOrder,
 } = userStore.actions

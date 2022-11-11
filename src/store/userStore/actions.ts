@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import { PaymentType } from '@src/interfaces/payment'
 import IProduct from '@src/interfaces/product'
 import ShippingTypeEnum from '@src/interfaces/shipping'
 import UsersService from '@src/services/usersService'
@@ -142,6 +143,15 @@ export const setShippingAddress = createAsyncThunk(
     const state = thunkApi.getState() as AppState
     const shipping = { ...state.user.shipping, address }
     const response = usersService.changeShippingData(state.user.id, shipping)
+    return response
+  }
+)
+
+export const changePaymentType = createAsyncThunk(
+  'changePaymentType',
+  (paymentType: PaymentType, thunkApi) => {
+    const state = thunkApi.getState() as AppState
+    const response = usersService.changePaymentType(state.user.id, paymentType)
     return response
   }
 )
