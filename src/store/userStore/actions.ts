@@ -131,7 +131,7 @@ export const changeShippingType = createAsyncThunk(
   (type: ShippingTypeEnum, thunkApi) => {
     const state = thunkApi.getState() as AppState
     const shipping = { ...state.user.shipping, type }
-    const response = usersService.changeShippingType(state.user.id, shipping)
+    const response = usersService.changeShippingData(state.user.id, shipping)
     return response
   }
 )

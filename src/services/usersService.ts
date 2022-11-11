@@ -41,7 +41,7 @@ export default class UsersService implements IUsersService {
     return data
   }
 
-  changeShippingType = async (
+  changeShippingData = async (
     userID: number,
     shipping: IShipping
   ): Promise<IUser> => {
