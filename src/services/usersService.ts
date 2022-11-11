@@ -1,6 +1,6 @@
 import { PaymentType } from '@src/interfaces/payment'
 import IProduct from '@src/interfaces/product'
-import ShippingTypeEnum, { IShipping } from '@src/interfaces/shipping'
+import { IShipping } from '@src/interfaces/shipping'
 import IUser from '@src/interfaces/user'
 import apiService from './api'
 
