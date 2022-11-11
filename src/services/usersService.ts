@@ -1,4 +1,5 @@
 import IProduct from '@src/interfaces/product'
+import ShippingTypeEnum, { IShipping } from '@src/interfaces/shipping'
 import IUser from '@src/interfaces/user'
 import apiService from './api'
 
@@ -37,6 +38,14 @@ export default class UsersService implements IUsersService {
 
   updateBasket = async (userID: number, basket: IProduct[]): Promise<IUser> => {
     const { data } = await this.api.patch(`users/${userID}`, { basket })
+    return data
+  }
+
+  changeShippingType = async (
+    userID: number,
+    shipping: IShipping
+  ): Promise<IUser> => {
+    const { data } = await this.api.patch(`users/${userID}`, { shipping })
     return data
   }
 }

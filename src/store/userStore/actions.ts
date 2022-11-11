@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import IProduct from '@src/interfaces/product'
+import ShippingTypeEnum from '@src/interfaces/shipping'
 import UsersService from '@src/services/usersService'
 import { AppState } from '../store'
 
@@ -121,6 +122,16 @@ export const deleteFromBasket = createAsyncThunk(
     const state = thunkApi.getState() as AppState
     const newBasket = state.user.basket.filter((product) => product.id !== id)
     const response = usersService.updateBasket(state.user.id, newBasket)
+    return response
+  }
+)
+
+export const changeShippingType = createAsyncThunk(
+  'changeShippingType',
+  (type: ShippingTypeEnum, thunkApi) => {
+    const state = thunkApi.getState() as AppState
+    const shipping = { ...state.user.shipping, type }
+    const response = usersService.changeShippingType(state.user.id, shipping)
     return response
   }
 )

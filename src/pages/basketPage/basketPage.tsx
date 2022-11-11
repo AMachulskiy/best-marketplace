@@ -10,9 +10,9 @@ import { PaymentType, PaymentTypeValue } from '@src/interfaces/payment'
 import ShippingTypeEnum, {
   ShippingTypeValueEnum,
 } from '@src/interfaces/shipping'
+import { changeShippingType } from '@src/store/userStore/actions'
 import {
   changePaymentType,
-  changeShippingType,
   setShippingAddress,
 } from '@src/store/userStore/userStore'
 

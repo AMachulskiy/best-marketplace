@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { PaymentType } from '@src/interfaces/payment'
 import IProduct from '@src/interfaces/product'
-import ShippingTypeEnum from '@src/interfaces/shipping'
+import { IShipping } from '@src/interfaces/shipping'
 import IUser from '@src/interfaces/user'
 import {
   addToBasket,
   addToFavorite,
   changeSelectedProductCount,
+  changeShippingType,
   deleteFromBasket,
   deleteFromFavorite,
   getUser,
@@ -23,11 +24,7 @@ interface IUserState {
     phone: string
   }
   isNotification: boolean
-  shipping: {
-    type: ShippingTypeEnum
-    address: string
-    addresses: string[]
-  }
+  shipping: IShipping
   paymentType: PaymentType
   basket: IProduct[]
   favorite: IProduct[]
@@ -86,9 +83,6 @@ const userStore = createSlice({
         product.inOrder = action.payload
         return product
       })
-    },
-    changeShippingType: (state, action: PayloadAction<ShippingTypeEnum>) => {
-      state.shipping.type = action.payload
     },
     setShippingAddress: (state, action: PayloadAction<string>) => {
       state.shipping.address = action.payload
@@ -181,6 +175,13 @@ const userStore = createSlice({
       const user = action.payload
       state.basket = user.basket
     },
+    [changeShippingType.fulfilled.type]: (
+      state,
+      action: PayloadAction<IUser>
+    ) => {
+      const user = action.payload
+      state.shipping.type = user.shipping.type
+    },
   },
 })
 
@@ -188,7 +189,6 @@ export default userStore
 export const {
   changeProductInOrderStatus,
   changeAllInOrderStatus,
-  changeShippingType,
   setShippingAddress,
   changePaymentType,
   checkWarnings,
