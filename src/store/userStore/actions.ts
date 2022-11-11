@@ -7,14 +7,14 @@ import { AppState } from '../store'
 
 const usersService = new UsersService()
 
-export const getUser = createAsyncThunk('user', (id: number, thunkApi) => {
+export const getUser = createAsyncThunk('user', (id: number) => {
   const response = usersService.getUser(id)
   return response
 })
 
 export const setNotificationStatus = createAsyncThunk(
   'setNotification',
-  (data: { id: number; status: boolean }, thunkApi) => {
+  (data: { id: number; status: boolean }) => {
     const response = usersService.setNotificationStatus(data.id, data.status)
     return response
   }
