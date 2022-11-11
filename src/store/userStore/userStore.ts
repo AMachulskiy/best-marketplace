@@ -7,6 +7,7 @@ import {
   addToBasket,
   addToFavorite,
   changeSelectedProductCount,
+  deleteFromBasket,
   deleteFromFavorite,
   getUser,
   hideProductFromBayed,
@@ -85,11 +86,6 @@ const userStore = createSlice({
         product.inOrder = action.payload
         return product
       })
-    },
-    deleteFromBasket: (state, action: PayloadAction<number>) => {
-      state.basket = state.basket.filter(
-        (product) => product.id !== action.payload
-      )
     },
     changeShippingType: (state, action: PayloadAction<ShippingTypeEnum>) => {
       state.shipping.type = action.payload
@@ -178,6 +174,13 @@ const userStore = createSlice({
       const user = action.payload
       state.basket = user.basket
     },
+    [deleteFromBasket.fulfilled.type]: (
+      state,
+      action: PayloadAction<IUser>
+    ) => {
+      const user = action.payload
+      state.basket = user.basket
+    },
   },
 })
 
@@ -185,7 +188,6 @@ export default userStore
 export const {
   changeProductInOrderStatus,
   changeAllInOrderStatus,
-  deleteFromBasket,
   changeShippingType,
   setShippingAddress,
   changePaymentType,

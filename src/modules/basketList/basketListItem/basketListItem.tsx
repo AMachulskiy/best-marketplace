@@ -7,11 +7,9 @@ import { ReactFC } from '@src/interfaces/react'
 import {
   addToFavorite,
   changeSelectedProductCount,
-} from '@src/store/userStore/actions'
-import {
-  changeProductInOrderStatus,
   deleteFromBasket,
-} from '@src/store/userStore/userStore'
+} from '@src/store/userStore/actions'
+import { changeProductInOrderStatus } from '@src/store/userStore/userStore'
 import React from 'react'
 import { Form } from 'react-bootstrap'
 import { Link } from 'react-router-dom'

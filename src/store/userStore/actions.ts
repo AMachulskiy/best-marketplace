@@ -114,3 +114,13 @@ export const changeSelectedProductCount = createAsyncThunk(
     return response
   }
 )
+
+export const deleteFromBasket = createAsyncThunk(
+  'deleteFromBasket',
+  (id: number, thunkApi) => {
+    const state = thunkApi.getState() as AppState
+    const newBasket = state.user.basket.filter((product) => product.id !== id)
+    const response = usersService.updateBasket(state.user.id, newBasket)
+    return response
+  }
+)
