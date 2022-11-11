@@ -9,6 +9,7 @@ import {
   changePaymentType,
   changeSelectedProductCount,
   changeShippingType,
+  completeOrder,
   deleteFromBasket,
   deleteFromFavorite,
   getUser,
@@ -89,11 +90,6 @@ const userStore = createSlice({
     checkWarnings: (state) => {
       state.warnings.address = !state.shipping.address
       state.warnings.payment = !state.warnings.payment
-    },
-    completeOrder: (state) => {
-      const bayedProducts = state.basket.filter((product) => product.inOrder)
-      state.basket = state.basket.filter((product) => !product.inOrder)
-      state.bayed = [...state.bayed, ...bayedProducts]
     },
   },
   extraReducers: {
@@ -192,6 +188,11 @@ const userStore = createSlice({
       state.paymentType = user.paymentType
       state.warnings.payment = false
     },
+    [completeOrder.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
+      const user = action.payload
+      state.basket = user.basket
+      state.bayed = user.bayed
+    },
   },
 })
 
@@ -200,5 +201,4 @@ export const {
   changeProductInOrderStatus,
   changeAllInOrderStatus,
   checkWarnings,
-  completeOrder,
 } = userStore.actions

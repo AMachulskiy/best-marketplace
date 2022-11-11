@@ -155,3 +155,18 @@ export const changePaymentType = createAsyncThunk(
     return response
   }
 )
+
+export const completeOrder = createAsyncThunk(
+  'completeOrder',
+  (args, thunkApi) => {
+    const state = thunkApi.getState() as AppState
+    const bayedProducts = state.user.basket.filter((product) => product.inOrder)
+    const newBasket = state.user.basket.filter((product) => !product.inOrder)
+    const newBayed = [...state.user.bayed, ...bayedProducts]
+    const response = usersService.completeOrder(state.user.id, {
+      basket: newBasket,
+      bayed: newBayed,
+    })
+    return response
+  }
+)

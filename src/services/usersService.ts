@@ -57,4 +57,12 @@ export default class UsersService implements IUsersService {
     const { data } = await this.api.patch(`users/${userID}`, { paymentType })
     return data
   }
+
+  completeOrder = async (
+    userID: number,
+    orderData: { basket: IProduct[]; bayed: IProduct[] }
+  ): Promise<IUser> => {
+    const { data } = await this.api.patch(`users/${userID}`, { ...orderData })
+    return data
+  }
 }
