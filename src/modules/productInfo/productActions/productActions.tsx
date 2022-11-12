@@ -4,14 +4,14 @@ import priceHelpers from '@src/helpers/priceHelpers'
 import productHelpers from '@src/helpers/productHelpers'
 import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
 import { ReactFC } from '@src/interfaces/react'
+import routing from '@src/routes/routes'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   addToBasket,
   addToFavorite,
   deleteFromFavorite,
-} from '@src/store/userStore/userStore'
-import routing from '@src/routes/routes'
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+} from '@src/store/userStore/actions'
 import moment from 'moment'
 
 import './productActions.scss'

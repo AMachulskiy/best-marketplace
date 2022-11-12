@@ -14,7 +14,7 @@ import {
   changePaymentType,
   changeShippingType,
   setShippingAddress,
-} from '@src/store/userStore/userStore'
+} from '@src/store/userStore/actions'
 
 import './basketPage.scss'
 

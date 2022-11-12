@@ -2,7 +2,8 @@ import { ReactFC } from '@src/interfaces/react'
 import routing from '@src/routes/routes'
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
-import { changeNotificationStatus } from '@src/store/userStore/userStore'
+import { setNotificationStatus } from '@src/store/userStore/actions'
+import Preloader from '@src/components/preloader/preloader'
 import AccountCard from './accountCard/accountCard'
 
 import './account.scss'
@@ -11,10 +12,15 @@ const Account: ReactFC = () => {
   const dispatch = useAppDispatch()
   const {
     data: { name, lastname, phone },
+    id,
     isNotification,
     bayed,
     favorite,
+    isLoading,
+    haveData,
   } = useAppSelector((state) => state.user)
+
+  if (isLoading || !haveData) return <Preloader />
 
   return (
     <div className='account'>
@@ -25,7 +31,14 @@ const Account: ReactFC = () => {
           subTitle='Подтвердить аккаунт'
           label='Телефон'
           text={phone}
-          onNotification={() => dispatch(changeNotificationStatus())}
+          onNotification={() =>
+            dispatch(
+              setNotificationStatus({
+                id,
+                status: !isNotification,
+              })
+            )
+          }
           isNotification={isNotification}
           logout
           isBig

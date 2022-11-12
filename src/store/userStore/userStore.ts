@@ -1,20 +1,33 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { PaymentType } from '@src/interfaces/payment'
 import IProduct from '@src/interfaces/product'
-import ShippingTypeEnum from '@src/interfaces/shipping'
+import { IShipping } from '@src/interfaces/shipping'
+import IUser from '@src/interfaces/user'
+import {
+  addToBasket,
+  addToFavorite,
+  changePaymentType,
+  changeSelectedProductCount,
+  changeShippingType,
+  completeOrder,
+  deleteFromBasket,
+  deleteFromFavorite,
+  getUser,
+  hideProductFromBayed,
+  setNotificationStatus,
+  setShippingAddress,
+  toRefund,
+} from './actions'
 
 interface IUserState {
+  id: number
   data: {
     name: string
     lastname: string
     phone: string
   }
   isNotification: boolean
-  shipping: {
-    type: ShippingTypeEnum
-    address: string
-    addresses: string[]
-  }
+  shipping: IShipping
   paymentType: PaymentType
   basket: IProduct[]
   favorite: IProduct[]
@@ -23,22 +36,24 @@ interface IUserState {
     address: boolean
     payment: boolean
   }
+  isLoading: boolean
+  isError: boolean
+  error: string
+  haveData: boolean
 }
 
 const initialState: IUserState = {
+  id: null,
   data: {
-    name: 'Алексей',
-    lastname: 'Мачульский',
-    phone: '+7 888 888-88-88',
+    name: null,
+    lastname: null,
+    phone: null,
   },
   isNotification: false,
   shipping: {
-    type: ShippingTypeEnum.courier,
+    type: null,
     address: null,
-    addresses: [
-      'Москва, Красная площадь, д. 1',
-      'Санкт-Петербург, ул. Петра 1, д. 8',
-    ],
+    addresses: [],
   },
   paymentType: null,
   basket: [],
@@ -48,71 +63,16 @@ const initialState: IUserState = {
     address: false,
     payment: false,
   },
+  isLoading: false,
+  isError: false,
+  error: '',
+  haveData: false,
 }
 
 const userStore = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    changeNotificationStatus: (state) => {
-      state.isNotification = !state.isNotification
-    },
-    hideProductFromBayed: (state, action: PayloadAction<number>) => {
-      state.bayed = state.bayed.filter(
-        (product) => product.id !== action.payload
-      )
-    },
-    toRefund: (state, action: PayloadAction<number>) => {
-      state.bayed = state.bayed.map((product) => {
-        if (product.id === action.payload) {
-          product.isRefund = true
-        }
-        return product
-      })
-    },
-    addToFavorite: (state, action: PayloadAction<IProduct>) => {
-      const haveProductInFavorite = state.favorite.some(
-        (product) => product.id === action.payload.id
-      )
-      if (!haveProductInFavorite) {
-        state.favorite.push(action.payload)
-      }
-    },
-    deleteFromFavorite: (state, action: PayloadAction<number>) => {
-      state.favorite = state.favorite.filter(
-        (product) => product.id !== action.payload
-      )
-    },
-    addToBasket: (state, action: PayloadAction<IProduct>) => {
-      const haveProductInBasket = state.basket.some(
-        (product) => product.id === action.payload.id
-      )
-      if (haveProductInBasket) {
-        state.basket = state.basket.map((product) => {
-          if (product.id === action.payload.id) {
-            product.selectedCount++
-          }
-          return product
-        })
-      } else {
-        state.basket.push({
-          ...action.payload,
-          selectedCount: 1,
-          inOrder: true,
-        })
-      }
-    },
-    changeSelectedProductCount: (
-      state,
-      action: PayloadAction<{ id: number; count: number }>
-    ) => {
-      state.basket = state.basket.map((product) => {
-        if (product.id === action.payload.id) {
-          product.selectedCount = action.payload.count
-        }
-        return product
-      })
-    },
     changeProductInOrderStatus: (state, action: PayloadAction<number>) => {
       state.basket = state.basket.map((product) => {
         if (product.id === action.payload) {
@@ -127,49 +87,118 @@ const userStore = createSlice({
         return product
       })
     },
-    deleteFromBasket: (state, action: PayloadAction<number>) => {
-      state.basket = state.basket.filter(
-        (product) => product.id !== action.payload
-      )
-    },
-    changeShippingType: (state, action: PayloadAction<ShippingTypeEnum>) => {
-      state.shipping.type = action.payload
-    },
-    setShippingAddress: (state, action: PayloadAction<string>) => {
-      state.shipping.address = action.payload
-      state.warnings.address = false
-    },
-    changePaymentType: (state, action: PayloadAction<PaymentType>) => {
-      state.paymentType = action.payload
-      state.warnings.payment = false
-    },
     checkWarnings: (state) => {
       state.warnings.address = !state.shipping.address
       state.warnings.payment = !state.warnings.payment
     },
-    completeOrder: (state) => {
-      const bayedProducts = state.basket.filter((product) => product.inOrder)
-      state.basket = state.basket.filter((product) => !product.inOrder)
-      state.bayed = [...state.bayed, ...bayedProducts]
+  },
+  extraReducers: {
+    [getUser.pending.type]: (state) => {
+      state.isLoading = true
+    },
+    [getUser.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
+      const user = action.payload
+      state.isLoading = false
+      state.haveData = true
+      state.id = user.id
+      state.data = user.data
+      state.isNotification = user.isNotification
+      state.shipping = user.shipping
+      state.paymentType = user.paymentType
+      state.basket = user.basket
+      state.favorite = user.favorite
+      state.bayed = user.bayed
+    },
+    [getUser.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.isError = true
+      state.error = action.payload
+    },
+    [setNotificationStatus.fulfilled.type]: (
+      state,
+      action: PayloadAction<IUser>
+    ) => {
+      const user = action.payload
+      state.isNotification = user.isNotification
+    },
+    [hideProductFromBayed.fulfilled.type]: (
+      state,
+      action: PayloadAction<IUser>
+    ) => {
+      const user = action.payload
+      state.bayed = user.bayed
+    },
+    [toRefund.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
+      const user = action.payload
+      state.bayed = user.bayed
+    },
+    [addToFavorite.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
+      const user = action.payload
+      if (user) {
+        state.favorite = user.favorite
+      }
+    },
+    [deleteFromFavorite.fulfilled.type]: (
+      state,
+      action: PayloadAction<IUser>
+    ) => {
+      const user = action.payload
+      if (user) {
+        state.favorite = user.favorite
+      }
+    },
+    [addToBasket.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
+      const user = action.payload
+      state.basket = user.basket
+    },
+    [changeSelectedProductCount.fulfilled.type]: (
+      state,
+      action: PayloadAction<IUser>
+    ) => {
+      const user = action.payload
+      state.basket = user.basket
+    },
+    [deleteFromBasket.fulfilled.type]: (
+      state,
+      action: PayloadAction<IUser>
+    ) => {
+      const user = action.payload
+      state.basket = user.basket
+    },
+    [changeShippingType.fulfilled.type]: (
+      state,
+      action: PayloadAction<IUser>
+    ) => {
+      const user = action.payload
+      state.shipping.type = user.shipping.type
+    },
+    [setShippingAddress.fulfilled.type]: (
+      state,
+      action: PayloadAction<IUser>
+    ) => {
+      const user = action.payload
+      state.shipping.address = user.shipping.address
+      state.warnings.address = false
+    },
+    [changePaymentType.fulfilled.type]: (
+      state,
+      action: PayloadAction<IUser>
+    ) => {
+      const user = action.payload
+      state.paymentType = user.paymentType
+      state.warnings.payment = false
+    },
+    [completeOrder.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
+      const user = action.payload
+      state.basket = user.basket
+      state.bayed = user.bayed
     },
   },
 })
 
 export default userStore
 export const {
-  changeNotificationStatus,
-  hideProductFromBayed,
-  toRefund,
-  addToFavorite,
-  deleteFromFavorite,
-  addToBasket,
-  changeSelectedProductCount,
   changeProductInOrderStatus,
   changeAllInOrderStatus,
-  deleteFromBasket,
-  changeShippingType,
-  setShippingAddress,
-  changePaymentType,
   checkWarnings,
-  completeOrder,
 } = userStore.actions

@@ -10,7 +10,7 @@ import {
   addToBasket,
   addToFavorite,
   deleteFromFavorite,
-} from '@src/store/userStore/userStore'
+} from '@src/store/userStore/actions'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
