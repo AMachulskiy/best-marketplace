@@ -21,8 +21,9 @@ const saleData: ICheckRadio[] = [
 
 const Filters: ReactFC = () => {
   const dispatch = useAppDispatch()
-  const { filters, selectedFilters, isLoading, isError, error, haveData } =
-    useAppSelector((state) => state.products)
+  const { filters, selectedFilters, isLoading, haveData } = useAppSelector(
+    (state) => state.products
+  )
 
   useEffect(() => {
     if (!haveData) {
